@@ -18,23 +18,42 @@ In this paper we propose MA-DV2F: Multi-Agent Dynamic Velocity Vector Field. It 
 <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
   <tr>
     <td width="50%">
+      <text>
+        Velocity Vector Field of the Blue Vehicle
+      </text>
+    </td>
+    <td width="50%">
+      <text>
+        Velocity Vector Field of the Purple Vehicle
+      </text>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
       <img src="./images/velocity_field/vehicle_0_dvf.gif">
-      <h2 class="has-text-centered"> Velocity Vector Field of the Blue Vehicle</h2>
     </td>
     <td width="50%">
       <img src="./images/velocity_field/vehicle_1_dvf.gif">
-      <h2 class="has-text-centered"> Velocity Vector Field of the Purple Vehicle</h2>
     </td>
   </tr>
-  <br /> 
+  <tr>
+    <td width="50%">
+      <text>
+        Velocity Vector Field of the Pink Vehicle
+      </text>
+    </td>
+    <td width="50%">
+      <text>
+        Velocity Vector Field of the Red Vehicle
+      </text>
+    </td>
+  </tr>
   <tr>
     <td width="50%">
       <img src="./images/velocity_field/vehicle_2_dvf.gif">
-      <h2 class="has-text-centered"> Velocity Vector Field of the Pink Vehicle</h2>
     </td>
     <td width="50%">
       <img src="./images/velocity_field/vehicle_3_dvf.gif">
-      <h2 class="has-text-centered"> Velocity Vector Field of the Red Vehicle </h2>
     </td>
   </tr>
 </table>

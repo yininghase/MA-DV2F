@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="MA-DV2F: Multi-Agent Navigation in Unconstrained Environments using Dynamic Velocity Vector Field">
-  <meta property="og:title" content="MA-DV2F: Multi-Agent Navigation in Unconstrained Environments using Dynamic Velocity Vector Field"/>
-  <meta property="og:description" content="MA-DV2F: Multi-Agent Navigation in Unconstrained Environments using Dynamic Velocity Vector Field"/>
+  <meta name="description" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field">
+  <meta property="og:title" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field"/>
+  <meta property="og:description" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field"/>
   <meta property="og:url" content="https://yininghase.github.io/MA-DV2F/"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
   <!-- <meta property="og:image" content="images/overview.jpg" /> -->
@@ -14,8 +14,8 @@
   <!-- <meta property="og:image:height" content="562"/> -->
 
 
-  <!-- <meta name="twitter:title" content="MA-DV2F: Multi-Agent Navigation in Unconstrained Environments using Dynamic Velocity Vector Field"> -->
-  <!-- <meta name="twitter:description" content="MA-DV2F: Multi-Agent Navigation in Unconstrained Environments using Dynamic Velocity Vector Field"> -->
+  <!-- <meta name="twitter:title" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field"> -->
+  <!-- <meta name="twitter:description" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field"> -->
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <!-- <meta name="twitter:image" content="images/overview.jpg"> -->
   <!-- <meta name="twitter:card" content="summary_large_image"> -->
@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>MA-DV2F: Multi-Agent Navigation in Unconstrained Environments using Dynamic Velocity Vector Field</title>
+  <title>MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field</title>
   <link rel="icon" type="image/x-icon" href="static/images/favicon.icon">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -45,14 +45,13 @@
   <script src="static/js/index.js"></script>
 </head>
 <body>
-
-
+  
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">MA-DV<sup>2</sup>F: Multi-Agent Navigation in Unconstrained Environments using Dynamic Velocity Vector Field</h1>
+            <h1 class="title is-1 publication-title">MA-DV<sup>2</sup>F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
@@ -143,6 +142,11 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
+            In this paper we propose MA-DV<sup>2</sup>F: Multi-Agent Dynamic Velocity Vector Field. It is a framework for simultaneously controlling a group of vehicles in challenging environments. 
+            DV<sup>2</sup>F is generated for each vehicle independently and provides a map of reference orientation and speed that a vehicle must attain at any point on the navigation grid such that it safely reaches its target. 
+            The field is dynamically updated depending on the speed and proximity of the ego-vehicle to other agents. 
+            This dynamic adaptation of the velocity vector field allows prevention of imminent collisions.  
+            Experimental results show that MA-DV<sup>2</sup>F outperforms concurrent methods in terms of safety, computational efficiency and accuracy in reaching the target when scaling to a large number of vehicles.
           </p>
         </div>
       </div>

@@ -10,7 +10,8 @@ This repository contains the code for the paper **MA-DV2F: A Multi-Agent Navigat
 
 In this paper we propose MA-DV2F: Multi-Agent Dynamic Velocity Vector Field. It is a framework for simultaneously controlling a group of vehicles in challenging environments. DV2F is generated for each vehicle independently and provides a map of reference orientation and speed that a vehicle must attain at any point on the navigation grid such that it safely reaches its target. The field is dynamically updated depending on the speed and proximity of the ego-vehicle to other agents. This dynamic adaptation of the velocity vector field allows prevention of imminent collisions. Experimental results show that MA-DV2F outperforms concurrent methods in terms of safety, computational efficiency and accuracy in reaching the target when scaling to a large number of vehicles.
 
-<div align="center"> <img width="50%" src="./images/pipeline_overview.png"></div>
+![image](./images/pipeline_overview.png)
+
 
 ## Visualization of Dynamic Velocity Vector Field 
 

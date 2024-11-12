@@ -3,7 +3,7 @@
 **Yining Ma, Qadeer Khan and Daniel Cremers**
 
 
-[Project](https://yininghase.github.io/MA-DV2F/) | [ArXiv]()
+[Project](https://yininghase.github.io/MA-DV2F/) | [ArXiv](http://arxiv.org/abs/2411.06404)
 
 
 This repository contains the code for the paper **MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field**. 

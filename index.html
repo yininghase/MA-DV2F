@@ -206,7 +206,1116 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">
-          Comparison with Other Models
+        Comparison with Other Models
+      </h2>
+      <h2>
+        Statistic Results:
+      </h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
+            <tr>
+              <td colspan="2">
+                <table style="border:1px solid black;" width="100%">
+                  <tr>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Num. of</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Num. of</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">MA-DV<sup>2</sup>F</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">self supervised</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">CSDO</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">CL-MAPF</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GCBF+</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GCBF+</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">supervised</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Vehicles</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Obstacles</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">(Ours)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GNN (Ours)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[1]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[2]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[3]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">(Only Position)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GNN [4]</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">10</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9929</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9693</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.4290</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0613</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9021</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.7285</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">20</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9895</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9400</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.4963</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0563</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.8169</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.2041</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">30</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9793</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.8820</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.4977</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0458</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.7550</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0477</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">40</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9760</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.7063</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.5632</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0451</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.7080</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0137</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">50</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9686</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6523</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.5992</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0426</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6618</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0045</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">10</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9952</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9458</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9682</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.5640</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0509</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7192</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.3734</h2>
+                    </td>
+                </tr>
+                <tr style="border-bottom:1px dotted black;">
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">20</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9902</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9208</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9663</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.5997</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0393</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.6479</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0756</h2>
+                  </td>
+                </tr>
+                <tr style="border-bottom:1px dotted black;">
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">30</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9844</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.8998</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.8456</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.6320</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0385</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.5754</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0196</h2>
+                  </td>
+              </tr>
+              <tr style="border-bottom:1px dotted black;">
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">40</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9772</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.8723</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.6723</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.6531</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0330</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.5211</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0068</h2>
+                  </td>
+              </tr>
+              <tr style="border-bottom:1px dotted black;">
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">50</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.9704</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.8504</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.5897</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.6749</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0290</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.4789</h2>
+                  </td>
+                  <td style="border:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">0.0028</h2>
+                  </td>
+                </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="./images/success_rate/success_rate_no_obstacles_comparison.png">
+              </td>
+              <td>
+                <img src="./images/success_rate/success_rate_25_obstacles_comparison.png">
+              </td>
+            </tr>
+          </table>
+          <h2 class="subtitle has-text-centered">Success Rate</h2>
+        </div>
+        <div class="item">
+          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
+            <tr>
+              <td colspan="2">
+                <table style="border:1px solid black;" width="100%">
+                  <tr>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Num. of</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Num. of</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">MA-DV<sup>2</sup>F</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">self supervised</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">CSDO</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">CL-MAPF</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GCBF+</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GCBF+</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">supervised</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Vehicles</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Obstacles</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">(Ours)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GNN (Ours)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[1]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[2]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[3]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">(Only Position)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GNN [4]</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">10</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9988</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9888</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.4290</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0626</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9310</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9996</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">20</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9976</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9685</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.5010</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0611</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8894</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9962</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">30</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9968</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9690</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.5093</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0526</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8720</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9737</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">40</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9962</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9614</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.5842</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0541</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8608</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9181</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">50</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9972</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9517</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6352</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0539</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8554</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7968</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">10</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9952</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9803</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9902</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.5720</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0550</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7764</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9906</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">20</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9902</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9783</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9955</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6155</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0461</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7630</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9953</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">30</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9845</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9761</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9807</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6613</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0500</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7520</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9916</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">40</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9772</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9704</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9808</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6920</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0476</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7515</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9687</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">50</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9704</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9702</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9798</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7268</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0457</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7491</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9141</h2>
+                    </td>
+                  </tr>              
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="./images/success_rate/reach_rate_no_obstacles_comparison.png">
+              </td>
+              <td>
+                <img src="./images/success_rate/reach_rate_25_obstacles_comparison.png">
+              </td>
+            </tr>
+          </table>
+          <h2 class="subtitle has-text-centered">Reach Rate</h2>
+        </div>
+        <div class="item">
+          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
+            <tr>
+              <td colspan="2">
+                <table style="border:1px solid black;" width="100%">
+                  <tr>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Num. of</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Num. of</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">MA-DV<sup>2</sup>F</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">self supervised</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">CSDO</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">CL-MAPF</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GCBF+</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GCBF+</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">supervised</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Vehicles</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">Obstacles</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">(Ours)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GNN (Ours)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[1]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[2]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">[3]</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">(Only Position)</h2>
+                    </td>
+                    <td style="border-right:1px dotted black;">
+                      <h2 class="has-text-centered" style="font-size: large;">GNN [4]</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">10</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9941</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9805</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9687</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9687</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7288</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">20</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9919</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9715</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9953</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9166</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9166</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.2044</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">30</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9823</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9130</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9883</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8656</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8656</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0480</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">40</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9796</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7449</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9789</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8201</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8201</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0142</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">50</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9712</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7006</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9640</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7735</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7735</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0051</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">10</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9641</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9682</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9920</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9295</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9295</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.3772</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">20</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9399</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9708</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9843</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8607</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8607</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0761</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">30</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9208</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8649</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9707</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7810</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7810</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0198</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">40</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9999</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8979</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6916</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9611</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7143</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.7143</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0070</h2>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px dotted black;">
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">50</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">25</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">1.0000</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.8752</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6099</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.9481</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6647</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.6647</h2>
+                    </td>
+                    <td style="border:1px dotted black;">
+                        <h2 class="has-text-centered" style="font-size: large;">0.0030</h2>
+                    </td>
+                  </tr>                                            
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="./images/success_rate/safe_rate_no_obstacles_comparison.png">
+              </td>
+              <td>
+                <img src="./images/success_rate/safe_rate_25_obstacles_comparison.png">
+              </td>
+            </tr>
+          </table>
+          <h2 class="subtitle has-text-centered">Safe Rate</h2>
+        </div>
+      </div>
+      <h2>
+      Visualization Examples:
       </h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item">

@@ -4716,200 +4716,63 @@
   <br /> 
 </section>
 
-<section class="hero is-small is-light"  id="FE">
+<section class="hero is-small is-light"  id="L">
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">
-        Failed Examples of MA-DV<sup>2</sup>F
-      </h2>
-      <h2>
-        MA-DV<sup>2</sup>F may fail when the vehicles or the targets are (locally) too dense:
-      </h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <div class="columns is-centered">
-            <img src="./images/failed_cases/dvf_vehicle=10_obstacle=0_run=0.gif">
-          </div>
-          <h2 class="subtitle has-text-centered"> 10 Vehicles, no Obstacles </h2>
-        </div>
-        <div class="item">
-          <div class="columns is-centered">
-            <img src="./images/failed_cases/dvf_vehicle=10_obstacle=25_run=0.gif">
-          </div>
-          <h2 class="subtitle has-text-centered"> 10 Vehicles, 25 Obstacles </h2>
-        </div>
-        <div class="item">
-          <div class="columns is-centered">
-            <img src="./images/failed_cases/dvf_vehicle=10_obstacle=25_run=1.gif">
-          </div>
-          <h2 class="subtitle has-text-centered"> 10 Vehicles, 25 Obstacles </h2>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br /> 
-</section>
-
-<section class="hero is-small"  id="RA">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">
-        Robustness Analysis of MA-DV<sup>2</sup>F
-      </h2>
-      <h2>
-        We add steering angle noise &Delta;&phi; to the colored vehicles to explore its influence on the black vehicle. The steering angle noise satisfies the Gaussian Distribution: N(0, &alpha;*|&phi;|+&beta;), where &alpha; here is chosen to be 0.3, 
-        |&phi;| is the absolute predicted steering angle from model and &beta; is a fixed bias term to be 2&deg;:
+        Limitations of MA-DV<sup>2</sup>F
       </h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item">
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=10_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
+                <img src="./images/limitations/densely_packed/dvf_vehicle=10_obstacle=25_run=0.gif">
               </td>
               <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=10_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
+                <img src="./images/limitations/densely_packed/dvf_vehicle=10_obstacle=25_run=0.gif">
               </td>
             </tr>
           </table>
-          <h2 class="subtitle has-text-centered"> 10 Vehicles, no Obstacles </h2>
+          <h2 class="subtitle"> 
+            Some vehicles and obstacles are locally too dense. In this case, the vehicles may get stuck due to the limited local movable space.
+          </h2>
         </div>
         <div class="item">
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=10_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
+                <img src="./images/limitations/crowded_target/dvf_vehicle=10_obstacle=0_run=0.gif">
               </td>
               <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=10_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
+                <img src="./images/limitations/crowded_target/dvf_vehicle=10_obstacle=25_run=1.gif">
               </td>
             </tr>
           </table>
-          <h2 class="subtitle has-text-centered"> 10 Vehicles, 25 Obstacles </h2>
+          <h2 class="subtitle"> 
+            Our MA-DV<sup>2</sup>F takes a conservative strategy, in which vehicle safety (collision avoidance) has a higher priority than target arrival. 
+            As a result, when the targets of vehicles are too close to some other vehicles or obstacles, the vehicle would rather keep itself far away from others than driving to their targets.
+          </h2>
         </div>
         <div class="item">
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=20_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
+                <img src="./images/limitations/dynamic_obstacles/dvf_vehicle=30_obstacle=0_run=0.gif">
+                <h2 class="subtitle has-text-centered"> Failed Example </h2>
               </td>
               <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=20_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
+                <img src="./images/limitations/dynamic_obstacles/dvf_vehicle=30_obstacle=0_run=1.gif">
+                <h2 class="subtitle has-text-centered"> Successful Example </h2>
               </td>
             </tr>
           </table>
-          <h2 class="subtitle has-text-centered"> 20 Vehicles, no Obstacles </h2>
-        </div>
-        <div class="item">
-          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
-            <tr>
-              <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=20_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
-              </td>
-              <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=20_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
-              </td>
-            </tr>
-          </table>
-          <h2 class="subtitle has-text-centered"> 20 Vehicles, 25 Obstacles </h2>
-        </div>
-        <div class="item">
-          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
-            <tr>
-              <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=30_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
-              </td>
-              <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=30_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
-              </td>
-            </tr>
-          </table>
-          <h2 class="subtitle has-text-centered"> 30 Vehicles, no Obstacles </h2>
-        </div>
-        <div class="item">
-          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
-            <tr>
-              <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=30_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
-              </td>
-              <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=30_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
-              </td>
-            </tr>
-          </table>
-          <h2 class="subtitle has-text-centered"> 30 Vehicles, 25 Obstacles </h2>
-        </div>
-        <div class="item">
-          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
-            <tr>
-              <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=40_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
-              </td>
-              <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=40_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
-              </td>
-            </tr>
-          </table>
-          <h2 class="subtitle has-text-centered"> 40 Vehicles, no Obstacles </h2>
-        </div>
-        <div class="item">
-          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
-            <tr>
-              <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=40_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
-              </td>
-              <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=40_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
-              </td>
-            </tr>
-          </table>
-          <h2 class="subtitle has-text-centered"> 40 Vehicles, 25 Obstacles </h2>
-        </div>
-        <div class="item">
-          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
-            <tr>
-              <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=50_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
-              </td>
-              <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=50_obstacle=0_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
-              </td>
-            </tr>
-          </table>
-          <h2 class="subtitle has-text-centered"> 50 Vehicles, no Obstacles </h2>
-        </div>
-        <div class="item">
-          <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
-            <tr>
-              <td>
-                <img src="./images/robustness_analysis/dvf_with_noise/dvf_vehicle=50_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> No Noise </h2>
-              </td>
-              <td>
-                <img src="./images/robustness_analysis/dvf_without_noise/dvf_vehicle=50_obstacle=25_run=0.gif">
-                <h2 class="subtitle has-text-centered"> With Noise </h2>
-              </td>
-            </tr>
-          </table>
-          <h2 class="subtitle has-text-centered"> 10 Vehicles, 25 Obstacles </h2>
+          <h2 class="subtitle"> 
+            We sampled random steering angle and pedal for the colored vehicles to make them act as dynamic obstacles.
+            Only on the black vehicle ran our MA-DV<sup>2</sup>F. However, the black vehicle might collide on its way to the target. 
+            This shows that our algorithm can not garantee safety for the senarios with dynamic obstacles under the current hyperparameter settings. 
+            Increasing the collision avoiding margin can increase the vehicle safety, but may reduce the reach rate. 
+          </h2>
         </div>
       </div>
     </div>

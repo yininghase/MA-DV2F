@@ -4735,7 +4735,9 @@
             </tr>
           </table>
           <h2 class="subtitle"> 
-            Some vehicles and obstacles are locally too dense. In this case, the vehicles may get stuck due to the limited local movable space.
+            A scenario wherein multiple vehicles converge towards a location leading to high vehicle density. 
+            This results in so little room for navigation that the multiple vehicles cannot proceed without there being a risk of collisions. 
+            Hence, the vehicles prioritize safety and remain put in this place, leading to an impasse and failure to reach their destination.
           </h2>
         </div>
         <div class="item">
@@ -4750,8 +4752,9 @@
             </tr>
           </table>
           <h2 class="subtitle"> 
-            Our MA-DV<sup>2</sup>F takes a conservative strategy, in which vehicle safety (collision avoidance) has a higher priority than target arrival. 
-            As a result, when the targets of vehicles are too close to some other vehicles or obstacles, the vehicle would rather keep itself far away from others than driving to their targets.
+            A scenario wherein the targets of two vehicles are within the safety margins of one another. 
+            Our MA-DV<sup>2</sup>F again takes a conservative strategy, in which vehicle safety (collision avoidance) has a higher priority than target arrival. 
+            As a result, the vehicles have a preference to stay away from one another rather than driving to their respective targets.
           </h2>
         </div>
         <div class="item">
@@ -4768,10 +4771,10 @@
             </tr>
           </table>
           <h2 class="subtitle"> 
-            We sampled random steering angle and pedal for the colored vehicles to make them act as dynamic obstacles.
-            Only on the black vehicle ran our MA-DV<sup>2</sup>F. However, the black vehicle might collide on its way to the target. 
-            This shows that our algorithm can not garantee safety for the senarios with dynamic obstacles under the current hyperparameter settings. 
-            Increasing the collision avoiding margin can increase the vehicle safety, but may reduce the reach rate. 
+            In this scenario we focus on the black ego-vehicle. 
+            For all other vehicles we simulate an "unexpected behavior" by replacing the control commands predicted by MA-DV<sup>2</sup>F with uniform random noise in the range of the operating limits of the control commands, causing the neighboring vehicles to diverge away from their normal driving behavior. 
+            In some cases, this results in these vehicles colliding with the ego-vehicle, even though the ego-vehicle had taken corrective action to evade collision from them. 
+            To mitigate such collisions, a solution would be to increase the safety margin. However, as we saw in the sensitivity analysis, increasing the safety margin reduces the reach rate. 
           </h2>
         </div>
       </div>

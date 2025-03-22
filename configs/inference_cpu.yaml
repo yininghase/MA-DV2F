@@ -1,0 +1,63 @@
+# config for simulation
+horizon: 15 # only used for mpc
+simulation time: 300 # number of iteration for each simulation
+simulation runs: 10 # number of simulation
+run other algorithm: dvf # choose from [dvf, mpc]
+random offset: False # set it to False in the inference mode 
+sensor noise: False
+steering angle noise: False
+pedal noise: False
+
+model path: 
+
+collect data: False # keep it True if you need to calculate metrics for the inference result 
+collect trajectory: True # keep it True if you need to calculate metrics for the inference result 
+data folder: ./data/prediction # path to save prediction results of the model
+
+position tolerance: 1.0
+angle tolerance: 0.2
+stop tolerance: 0.1
+
+# config for MPC model
+control init: 
+
+distance cost: 1
+angle cost: 1
+collision cost: 20
+collision radius: 5
+obstacle cost: 20
+obstacle radius: 3
+velocity cost: 10 
+velocity limit: 3.5
+smoothness cost: 0.1 
+travel dist cost: 0
+
+# config for visualization 
+figure size: 8
+car size: 
+  - 1.0
+  - 2.5
+show plot: False
+save plot: True
+plot folder: ./plots/prediction
+
+# config for test data
+test data souce: fixed test data # choose from ["fixed test data" (use fixed test dataset), "on the fly" (randomly generate test case)]
+
+## config for fixed test data
+# Note: if you want to compare the performance of different models, you should fix the test dataset
+test data folder: ./data/test_dataset
+test data each case: 1 # keep it empty to use all test dataset or give a number to use partial test dataset
+
+## problem collection
+problem collection: # [num of vehicle, num of obstacle]
+  - [10, 0]
+  - [20, 0]
+  - [30, 0]
+  - [40, 0]
+  - [50, 0]
+  - [10, 25]
+  - [20, 25]
+  - [30, 25]
+  - [40, 25]
+  - [50, 25]

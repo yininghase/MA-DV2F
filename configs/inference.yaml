@@ -2,7 +2,7 @@
 simulation time: 2000 # number of iteration for each simulation
 simulation runs: 10 # number of simulation
 batch size: 200
-algorithm type: gnn # choose from [gnn, dvf]
+algorithm type: dvf # choose from [gnn, dvf]
 steering angle noise: False
 filter edges: True
 

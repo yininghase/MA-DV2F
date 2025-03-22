@@ -1,0 +1,32 @@
+# config for training
+horizon: 200 
+
+train max epochs: 500
+train patience: 15
+batch size: 4096
+batch split: 10
+num samples each case:
+random offset: True
+        
+initial learning rate: 0.01
+weight decay: 0.000001
+
+learning rate patience: 10
+learning rate factor: 0.2
+min learining rate: 0.00000001
+
+# config for dataset
+num of vehicles: 3 # max number of vehicle in trainval dataset
+num of obstacles: 4 # max number of obstacle in trainval dataset 
+data folder: 
+  - ./data/train_dataset/collision_mode
+  - ./data/train_dataset/normal_mode
+  - ./data/train_dataset/parking_mode
+
+augmentation: False
+
+# config for model
+model folder: ./models     
+model name: self_supervised_model
+   
+pretrained model: # leave it empty or give the path to the pretrained model

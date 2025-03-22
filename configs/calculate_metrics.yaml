@@ -1,0 +1,29 @@
+data folder: 
+  - ./data/prediction/dynamic_velocity_field/
+  # - ./data/prediction/self_supervised_model/
+
+intermediate success rate: 
+  default: [15,30,45,60,75,90,105,120,150,180]
+  (10,0): [25,30,35,40,45,50,55,60,65,70,75]
+  (20,0): [30,38,46,54,62,70,78,86,94,102,110]
+  (30,0): [40,50,60,70,80,90,100,110,120,130,140]
+  (40,0): [50,60,70,80,90,100,110,120,130,140,150]
+  (50,0): [60,70,80,90,100,110,120,130,140,150,160]
+  (10,25): [30,41,52,63,74,85,96,107,118,129,140]
+  (20,25): [40,54,68,82,96,110,124,138,152,166,180]
+  (30,25): [60,72,84,96,108,120,132,144,156,168,180]
+  (40,25): [60,75,90,105,120,135,150,165,180,195,210]
+  (50,25): [70,87,104,121,138,155,172,189,206,223,240]
+
+num of vehicles: 50 # max number of vehicle in prediction dataset
+num of obstacles: 25 # max number of obstacle in prediction dataset
+
+car size: 
+  - 1.0
+  - 2.5
+
+position tolerance: 1.25
+angle tolerance: 0.2
+stop tolerance: 0.05
+
+save metrics: True

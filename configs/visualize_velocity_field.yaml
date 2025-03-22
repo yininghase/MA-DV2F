@@ -1,0 +1,13 @@
+# config for visualization 
+num examples each case: 1
+
+figure size: 8
+car size: 
+  - 1.0
+  - 2.5
+show plot: False
+save plot: True 
+plot folder: ./plots/prediction
+
+problem collection: # [num of vehicle, num of obstacle]
+  - [2, 2]

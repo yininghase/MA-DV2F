@@ -130,7 +130,7 @@ cd <path_to_this_repo>
 python inference.py
 ```
 
-### GNN Model SELF-SUPERVISED Training
+### GNN Model Self-Supervised Training
 
 Modify the [config of model training](./configs/train.yaml) under your demand.
 

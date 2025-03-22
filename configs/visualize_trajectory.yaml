@@ -18,7 +18,7 @@ plot folder: ./plots/prediction
 num random selection: 10
 
 selected indices: # no space after comma in the key
-  10,0: [] # index of selected trajectory for visualization
+  10,0: [] # indices of selected trajectories for visualization
   20,0: []
   30,0: []
   40,0: []

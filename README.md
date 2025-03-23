@@ -84,7 +84,7 @@ Please organize the data structure as follows:
 root
 |
 data
-|-- trainval_dataset
+|-- train_dataset
 |   |-- collision_mode
 |   |   |-- train_data_vehicle={i}_obstacle={j}.pt
 |   |   |-- ...

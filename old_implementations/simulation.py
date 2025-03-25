@@ -140,7 +140,7 @@ def sim_run(config, model = None, device = 'cpu'):
         # check if the vehicle has not moved the last n steps and if this is not the case end the simulation
         n_steps = 10 # if the vehicle has not moved more then "stop tolerance" for n steps we end the simulation
         if len(state_i) > n_steps and \
-            np.all(np.sum(np.linalg.norm(np.diff(state_i[-n_steps:,0:1,:2], axis=0), axis=-1), axis=0) < config["stop tolerance"]):
+            np.all(np.sum(np.linalg.norm(np.diff(state_i[-n_steps:,:,:2], axis=0), axis=-1), axis=0) < config["stop tolerance"]):
             break
     
     num_step = len(state_i)-1

@@ -64,7 +64,7 @@ class Visualize_Trajectory:
                          self.config["num of obstacles"])
         cmap = plt.get_cmap('brg')
         self.cmap = cmap(np.linspace(0,1,num_colors))[...,:3]
-        self.cmap = np.concatenate((np.zeros((1,3)), self.cmap))
+        # self.cmap = np.concatenate((np.zeros((1,3)), self.cmap))
         
         self.show_attention = show_attention
         

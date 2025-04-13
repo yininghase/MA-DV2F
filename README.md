@@ -177,9 +177,14 @@ python useful_tools/visualize_trajectory.py
 
 ## BibTeX
 ```
-@article{ma2024ma,
-        title={MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field},
-        author={Ma, Yining and Khan, Qadeer and Cremers, Daniel},
-        journal={arXiv preprint arXiv:2411.06404},
-        year={2024}}
+@ARTICLE{10960653,
+  author={Ma, Yining and Khan, Qadeer and Cremers, Daniel},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={MA-DV $^{2}$ F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-8},
+  keywords={Vectors;Navigation;Vehicle dynamics;Training;Kinematics;Mathematical models;Force;Estimation;Trajectory;Neural networks;Path Planning for Multiple Mobile Robots or Agents;Autonomous Vehicle Navigation;Autonomous Agents},
+  doi={10.1109/LRA.2025.3559830}}
 ```

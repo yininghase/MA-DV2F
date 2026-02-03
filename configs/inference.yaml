@@ -1,0 +1,38 @@
+# config for simulation
+simulation time: 2000 # number of iteration for each simulation
+simulation runs: 10 # number of simulation
+batch size: 200
+algorithm type: dvf # choose from [gnn, dvf]
+steering angle noise: False
+filter edges: True
+
+model path: ./models/self_supervised_model.pth # path to the model 
+
+position tolerance: 1.0
+angle tolerance: 0.2
+stop tolerance: 0.1
+
+collect data: True # keep it True if you need to calculate metrics for the inference result 
+collect trajectory: True # keep it True if you need to calculate metrics for the inference result 
+data folder: ./data/prediction/ # path to save prediction results of the model
+
+# config for test data
+test data souce: fixed test data # choose from ["fixed test data" (use fixed test dataset), "on the fly" (randomly generate test case)]
+
+## config for fixed test data
+# Note: if you want to compare the performance of different models, you should fix the test dataset
+test data folder: ./data/test_dataset
+test data each case: # keep it empty to use all test dataset or give a number to use partial test dataset
+
+## problem collection
+problem collection: # [num of vehicle, num of obstacle]
+  - [10, 0]
+  - [20, 0]
+  - [30, 0]
+  - [40, 0]
+  - [50, 0]
+  - [10, 25]
+  - [20, 25]
+  - [30, 25]
+  - [40, 25]
+  - [50, 25]

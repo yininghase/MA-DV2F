@@ -1,0 +1,23 @@
+data folder: ./data/new_dataset # path to save dataset
+
+data length each case: 1000
+zero velocity: True
+is test data: True
+
+position range: 
+collision mode: True
+parking mode: False
+
+problem collection: 
+  - [10, 0]
+  - [20, 0]
+  - [30, 0]
+  - [40, 0]
+  - [50, 0]
+  - [10, 25]
+  - [20, 25]
+  - [30, 25]
+  - [40, 25]
+  - [50, 25]
+
+

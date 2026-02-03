@@ -1,0 +1,30 @@
+data folder: ./data/prediction/dvf
+
+num of vehicles: 250 # max number of vehicle in prediction dataset
+num of obstacles: 125 # max number of obstacle in prediction dataset
+
+run other algorithm: 
+control init:
+is model: True
+
+figure size: 8
+car size: 
+  - 1.0
+  - 2.5
+show plot: False
+save plot: True 
+plot folder: ./plots/prediction
+
+num random selection: 10
+
+selected indices: # no space after comma in the key
+  10,0: [] # indices of selected trajectories for visualization
+  20,0: []
+  30,0: []
+  40,0: []
+  50,0: []
+  10,25: []
+  20,25: []
+  30,25: []
+  40,25: []
+  50,25: []

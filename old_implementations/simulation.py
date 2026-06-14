@@ -16,6 +16,44 @@ from dvf_cpu import dynamic_velocity_field
 
 
 def sim_run(config, model = None, device = 'cpu'):
+    """Run a single simulation episode using MPC, DVF, or a learned GNN model.
+
+    Iterates over simulation time steps: computes optimal controls via the
+    selected algorithm, applies vehicle dynamics, optionally adds noise and
+    random offsets, checks convergence, and collects training data.
+
+    Args:
+        config (dict): Configuration dictionary containing keys:
+            run other algorithm (str or None): Algorithm name ("mpc", "dvf", or None).
+            enable dvf (bool): Whether to use dynamic velocity field as model.
+            model path (str): Path to trained model checkpoint.
+            simulation time (int): Maximum number of simulation steps.
+            horizon (int): Prediction horizon length.
+            starts (np.ndarray): Initial vehicle states.
+            targets (np.ndarray): Target vehicle states.
+            obstacles (np.ndarray): Obstacle data.
+            stop tolerance (float): Minimum movement threshold for early stopping.
+            position tolerance (float): Position error tolerance for success check.
+            angle tolerance (float): Heading error tolerance for success check.
+            collect data (bool): Whether to return training data tensors.
+            sensor noise (bool): Whether to add sensor noise to observations.
+            steering angle noise (bool): Whether to add noise to steering predictions.
+            pedal noise (bool): Whether to add noise to pedal predictions.
+            random offset (bool): Whether to add random offsets to states.
+            save plot (bool): Whether to save visualization plots.
+            show plot (bool): Whether to display visualization plots.
+        model (torch.nn.Module or None): Trained GNN model for predictions.
+        device (str): Device for model inference ("cpu" or "cuda").
+
+    Returns:
+        tuple: (X_tensor, batches_tensor, y_tensor_GT, y_tensor_model, success, num_step) where
+            X_tensor (torch.Tensor or None): Input features for training [T * (N_veh+N_obst), 8].
+            batches_tensor (torch.Tensor or None): Batch information [T, 2].
+            y_tensor_GT (torch.Tensor or None): Ground truth controls from MPC [T * N_veh, horizon*2].
+            y_tensor_model (torch.Tensor or None): Model-predicted controls [T * N_veh, horizon*2].
+            success (bool): Whether all vehicles reached their targets within tolerance.
+            num_step (int): Number of simulation steps executed.
+    """
     
     if config["run other algorithm"] == 'mpc':
         mpc = ModelPredictiveControl(config)
@@ -234,6 +272,21 @@ def sim_run(config, model = None, device = 'cpu'):
 
 
 def vehicle_kinematic(prev_state, control, dt=0.2):
+    """Apply the vehicle kinematic model to compute the next state.
+
+    Simulates one time step of bicycle kinematics: position update from velocity
+    and heading, heading change from steering angle, and velocity response to
+    pedal input with a damping factor of 0.99.
+
+    Args:
+        prev_state (np.ndarray): Current state [..., 4] with (x, y, psi, v).
+        control (np.ndarray): Control inputs [..., 2] with (pedal, steering_angle).
+        dt (float): Time step duration in seconds (default 0.2).
+
+    Returns:
+        np.ndarray: Next state array with same shape as prev_state containing
+            (x, y, psi, v) after one kinematic time step.
+    """
     x_t = prev_state[...,0]
     y_t = prev_state[...,1]
     psi_t = prev_state[...,2]
@@ -259,6 +312,21 @@ def vehicle_kinematic(prev_state, control, dt=0.2):
   
 
 def get_predictions(horizon, initial_state, u, dt=0.2):
+    """Roll out vehicle dynamics over a horizon to obtain predicted state trajectory.
+
+    Sequentially applies vehicle_kinematic for each control step starting from
+    the initial state, producing a full predicted trajectory.
+
+    Args:
+        horizon (int): Number of prediction steps.
+        initial_state (np.ndarray): Starting state [N_veh, 4] with (x, y, psi, v).
+        u (np.ndarray): Control sequence [horizon, N_veh, 2] with (pedal, steering).
+        dt (float): Time step duration in seconds (default 0.2).
+
+    Returns:
+        np.ndarray: Predicted state trajectory [horizon+1, N_veh, 4] with
+            (x, y, psi, v) at each time step including the initial state.
+    """
     
     predicted_state = np.array([initial_state])
     for i in range(horizon):
@@ -268,6 +336,21 @@ def get_predictions(horizon, initial_state, u, dt=0.2):
     return predicted_state
 
 def introduce_random_offset(y, num_vehicle, state_quotient, base_offset=1):
+    """Add Gaussian noise scaled by simulation progress to vehicle states.
+
+    Applies decreasing random perturbations as simulation progresses, with
+    early steps receiving larger offsets to encourage exploration.
+
+    Args:
+        y (np.ndarray): Current vehicle state [1, N_veh, 4] with (x, y, psi, v).
+        num_vehicle (int): Number of vehicles in the simulation.
+        state_quotient (float): Simulation progress ratio (0 to 1), used to scale offset.
+        base_offset (float): Base scaling factor for noise magnitude (default 1).
+
+    Returns:
+        np.ndarray: Noisy state with same shape as y, perturbed by Gaussian offsets
+            with sigma (0.25, 0.25, pi/18, 0.25) scaled by (base_offset - state_quotient).
+    """
 
     sigma = np.array([0.25,0.25,np.pi/18,0.25])
     offset = np.random.normal(0, sigma*(base_offset-state_quotient), (num_vehicle,4))
@@ -275,6 +358,19 @@ def introduce_random_offset(y, num_vehicle, state_quotient, base_offset=1):
     return y + offset
 
 def introduce_sensor_noise(x, num_vehicle, sigma=[0.05,0.05,np.pi/36,0.05]):
+    """Add velocity-dependent Gaussian sensor noise to vehicle observations.
+
+    Simulates realistic sensor noise where uncertainty scales with vehicle speed.
+
+    Args:
+        x (np.ndarray): True vehicle states [N_veh, 4] with (x, y, psi, v).
+        num_vehicle (int): Number of vehicles.
+        sigma (list): Base noise standard deviations for (x, y, psi, v) (default [0.05, 0.05, pi/36, 0.05]).
+
+    Returns:
+        np.ndarray: Noisy observation with same shape as x, perturbed by offsets with
+            standard deviation scaled by the absolute velocity of each vehicle.
+    """
 
     v = np.abs(x[:,3:4])
     offset = np.random.normal(np.zeros((num_vehicle,4)), np.array(sigma)*v)
@@ -282,6 +378,21 @@ def introduce_sensor_noise(x, num_vehicle, sigma=[0.05,0.05,np.pi/36,0.05]):
     return x + offset
 
 def introduce_steering_angle_noise(u, num_vehicle, sigma=0.25):
+    """Add noise to predicted steering angle controls.
+
+    Perturbs the first-step steering angle with velocity-dependent noise and
+    replaces subsequent horizon steps with random uniform values to simulate
+    exploration in the control space.
+
+    Args:
+        u (np.ndarray): Control sequence [horizon, N_veh, 2] with (pedal, steering).
+        num_vehicle (int): Number of vehicles.
+        sigma (float): Base noise scale factor for steering perturbation (default 0.25).
+
+    Returns:
+        np.ndarray: Noisy control sequence with same shape as u, where the first step
+            steering angle is clipped to [-0.8, 0.8] and subsequent steps are uniform random.
+    """
     
     theta = np.abs(u[0,:,1])
     offset = np.random.normal(np.zeros(num_vehicle), sigma*theta+np.pi/90)
@@ -292,6 +403,22 @@ def introduce_steering_angle_noise(u, num_vehicle, sigma=0.25):
     return u
 
 def introduce_pedal_noise(u, x, num_vehicle, sigma=0.25):
+    """Add noise to predicted pedal controls.
+
+    Perturbs the first-step pedal with velocity-dependent noise and replaces
+    subsequent horizon steps with random uniform values to simulate exploration
+    in the control space.
+
+    Args:
+        u (np.ndarray): Control sequence [horizon, N_veh, 2] with (pedal, steering).
+        x (np.ndarray): Current vehicle states [N_veh, 4] with (x, y, psi, v).
+        num_vehicle (int): Number of vehicles.
+        sigma (float): Base noise scale factor for pedal perturbation (default 0.25).
+
+    Returns:
+        np.ndarray: Noisy control sequence with same shape as u, where the first step
+            pedal is clipped to [-1.0, 1.0] and subsequent steps are uniform random.
+    """
     
     vel = np.abs(x[:,3])
     offset = np.random.normal(np.zeros(num_vehicle), sigma*vel)

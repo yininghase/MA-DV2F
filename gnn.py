@@ -10,7 +10,21 @@ from u_attention_conv import MyTransformerConv
 
 
 class ConvResidualBlock(torch.nn.Module):
+    """Residual graph convolution block with two TransformerConv layers.
+
+    Each block applies: Conv1 -> BN -> ReLU -> Conv2 -> BN -> +skip -> ReLU.
+    """
     def __init__(self, io_node_num, hidden_node_num, key_query_len=512):
+        """Initialise the residual convolution block.
+
+        Args:
+            io_node_num (int): Input/output feature dimension.
+            hidden_node_num (int): Hidden dimension between the two conv layers.
+            key_query_len (int): Key/query dimension for the transformer conv.
+        
+        Returns:
+            None.
+        """
         super().__init__()
 
         self.conv1 = MyTransformerConv(io_node_num, hidden_node_num, key_query_len=key_query_len)
@@ -21,6 +35,15 @@ class ConvResidualBlock(torch.nn.Module):
         self.a2 = ReLU()
          
     def forward(self, x0, edges):
+        """Apply two convolutional layers with residual connection.
+
+        Args:
+            x0 (Tensor): Input features [N, io_node_num].
+            edges (Tensor): Edge indices [2, E].
+
+        Returns:
+            Tensor: Output features [N, io_node_num].
+        """
         
         x = self.conv1(x0, edges)
         x = self.bn1(x)
@@ -35,7 +58,18 @@ class ConvResidualBlock(torch.nn.Module):
 
 
 class LinearBlock(torch.nn.Module):
+    """Fully-connected block with batch normalisation and activation."""
     def __init__(self, in_node_num, out_node_num, activation="relu"):
+        """Initialise the linear block.
+
+        Args:
+            in_node_num (int): Input dimension.
+            out_node_num (int): Output dimension.
+            activation (str): Activation type ("relu" or "tanh").
+        
+        Returns:
+            None.
+        """
         super().__init__()
         
         self.linear = Linear(in_node_num, out_node_num, weight_initializer='kaiming_uniform')
@@ -49,6 +83,15 @@ class LinearBlock(torch.nn.Module):
             raise NotImplementedError("Not implement this type of activation function!")
         
     def forward(self, x, x0=None):
+        """Forward pass with optional residual connection.
+
+        Args:
+            x (Tensor): Input features [N, in_node_num].
+            x0 (Tensor, optional): Residual skip connection.
+
+        Returns:
+            Tensor: Output features [N, out_node_num].
+        """
         
         x = self.linear(x)
         x = self.bn(x)
@@ -62,7 +105,17 @@ class LinearBlock(torch.nn.Module):
 
 
 class LinearResidualBlock(torch.nn.Module):
+    """Residual MLP block with two linear layers."""
     def __init__(self, io_node_num, hidden_node_num):
+        """Initialise the residual MLP block.
+
+        Args:
+            io_node_num (int): Input/output dimension.
+            hidden_node_num (int): Hidden dimension.
+        
+        Returns:
+            None.
+        """
         super().__init__()
         
         self.linear1 = LinearBlock(io_node_num, hidden_node_num)
@@ -70,6 +123,14 @@ class LinearResidualBlock(torch.nn.Module):
     
         
     def forward(self, x0):
+        """Two linear layers with residual connection.
+
+        Args:
+            x0 (Tensor): Input features [N, io_node_num].
+
+        Returns:
+            Tensor: Output features [N, io_node_num].
+        """
         
         x = self.linear1(x0)
         x = self.linear2(x,x0)
@@ -78,9 +139,39 @@ class LinearResidualBlock(torch.nn.Module):
        
 
 class IterativeGNNModel(torch.nn.Module):
+    """Core iterative GNN model for multi-agent navigation.
+
+    Supports multiple operating modes:
+      - "inference": forward pass through the GNN to predict controls.
+      - "self supervised training": GNN forward + compute DVF references.
+      - "dynamic velocity field": compute analytical DVF references only.
+      - "supervised training": GNN forward with GT targets.
+
+    The model uses transformer-based graph convolution with edge filtering
+    for efficiency, and includes a bicycle kinematics model for rollout.
+    """
     def __init__(self, horizon, max_num_vehicles, max_num_obstacles, num_blocks=4,  
                  device='cpu', mode="inference", load_all_simpler=True, 
-                 safe_distance=1.5, parking_distance=5, default_v=2.5, vehicle_radius=1.5): 
+                 safe_distance=1.5, parking_distance=5, default_v=2.5, vehicle_radius=1.5):
+        """Initialise the IterativeGNNModel.
+
+        Args:
+            horizon (int): Planning horizon for training mode.
+            max_num_vehicles (int): Maximum number of vehicles supported.
+            max_num_obstacles (int): Maximum number of obstacles supported.
+            num_blocks (int): Number of residual blocks (unused, kept for compat).
+            device (str): Torch device string.
+            mode (str): One of "inference", "self supervised training",
+                "supervised training", "dynamic velocity field".
+            load_all_simpler (bool): Precompute edges for all sub-problem sizes.
+            safe_distance (float): Minimum safe separation distance.
+            parking_distance (float): Distance threshold for parking mode.
+            default_v (float): Default reference speed.
+            vehicle_radius (float): Vehicle bounding circle radius.
+        
+        Returns:
+            None.
+        """
         super().__init__()
         self.device = device
         self.horizon = horizon
@@ -107,6 +198,17 @@ class IterativeGNNModel(torch.nn.Module):
         self.block3 = LinearBlock(80, self.output_length, activation="tanh")
         
     def generate_edge_template(self):
+        """Precompute edge indices for all (vehicles, obstacles) combinations.
+
+        For each combination, generates:
+          - vehicle-to-vehicle edges (all permutations of pairs)
+          - obstacle-to-vehicle edges (every obstacle to every vehicle)
+        Results are cached in self.edge_template for fast lookup during
+        batched inference.
+
+        Returns:
+            dict: Mapping from (total_nodes, num_vehicles) to [veh_edges, obs_edges].
+        """
         
         assert self.max_num_vehicles >= 1, \
                'Must have at least one vehicle!'
@@ -163,6 +265,17 @@ class IterativeGNNModel(torch.nn.Module):
 
     
     def get_edges(self, batches):
+        """Retrieve and offset edge indices for the current batch.
+
+        Looks up precomputed edge templates and applies batch offsets to get
+        global indices for the concatenated batch tensor.
+
+        Args:
+            batches (Tensor): Batch descriptors [B, 2] each (total_nodes, num_veh).
+
+        Returns:
+            tuple[Tensor, Tensor]: Vehicle-vehicle edges and obstacle-vehicle edges.
+        """
         
         edges_vehicles = torch.tensor([[],[]]).long().to(self.device)
         edges_obstacles = torch.tensor([[],[]]).long().to(self.device)
@@ -186,6 +299,15 @@ class IterativeGNNModel(torch.nn.Module):
         return edges_vehicles, edges_obstacles
     
     def forward_nn(self, x, edges):
+        """Run the GNN forward pass: linear -> conv -> conv -> linear.
+
+        Args:
+            x (Tensor): Input features [N, 8].
+            edges (Tensor): Edge indices [2, E].
+
+        Returns:
+            Tensor: Predicted controls [N, 2] scaled by self.bound.
+        """
         
         x = self.block0(x)
         x = self.block1(x, edges)
@@ -197,6 +319,18 @@ class IterativeGNNModel(torch.nn.Module):
     
     @torch.no_grad()
     def filter_edges(self, x, edges):
+        """Remove edges between agents that are far apart.
+
+        Only keeps edges where the distance between ego and neighbor is within
+        a dynamic threshold based on their speeds, safe distance, and radii.
+
+        Args:
+            x (Tensor): Node features [N, 8].
+            edges (Tensor): Full edge indices [2, E].
+
+        Returns:
+            Tensor: Filtered edge indices [2, E'].
+        """
         
         position_ego = x[edges[1],:2]
         position_neighbor = x[edges[0],:2]
@@ -213,6 +347,16 @@ class IterativeGNNModel(torch.nn.Module):
         return edges_filtered
 
     def forward(self, x0, batches, filter_edges=True):
+        """Main forward dispatch based on operating mode.
+
+        Args:
+            x0 (Tensor): Input node features [N, 8].
+            batches (Tensor): Batch descriptors [B, 2].
+            filter_edges (bool): Whether to filter distant edges.
+
+        Returns:
+            Controls, targets, next state, edges, and/or statics depending on mode.
+        """
         
         veh_idx = (x0[:,-1] == 0)
         obst_idx = (x0[:,-1] != 0)
@@ -274,6 +418,24 @@ class IterativeGNNModel(torch.nn.Module):
     
     @torch.no_grad()
     def get_reference(self, x, edges, pos_tolerance=0.25, ang_tolerance=0.2):
+        """Compute the Dynamic Velocity Field (DVF) reference controls analytically.
+
+        For each vehicle, computes a reference (pedal, steering) that:
+          - Attracts the vehicle toward its target (with parking-mode blending).
+          - Repels the vehicle from obstacles and other vehicles.
+          - Adds a tangential "roundabout" flow around obstacles in the path.
+          - Enforces kinematic feasibility (steering limits, speed bounds).
+          - Adjusts forward/backward motion based on orientation alignment.
+
+        Args:
+            x (Tensor): Node features [N, 8].
+            edges (Tensor): Edge indices [2, E].
+            pos_tolerance (float): Position tolerance for "at target".
+            ang_tolerance (float): Angle tolerance for "at target".
+
+        Returns:
+            Tensor: Reference controls [N_veh, 2] (pedal, steering).
+        """
         
         veh_idx = (x[:,-1] == 0)
         obst_idx = (x[:,-1] != 0)
@@ -421,6 +583,19 @@ class IterativeGNNModel(torch.nn.Module):
     
     @staticmethod
     def introduce_random_offset(x, state_quotient, sigma=[1,1,pi/18,0.5]):
+        """Add random Gaussian noise to vehicle states for robust training.
+
+        Used during self-supervised training to improve robustness by perturbing
+        vehicle positions, orientations, and velocities.
+
+        Args:
+            x (Tensor): Node features [N, 8].
+            state_quotient (float or Tensor): Scale factor for noise variance.
+            sigma (list): Per-component noise standard deviations.
+
+        Returns:
+            Tensor: Noisy node features.
+        """
 
         with torch.no_grad():
             veh_idx = (x[:,-1] == 0)
@@ -440,6 +615,15 @@ class IterativeGNNModel(torch.nn.Module):
         return x
     
     def vehicle_dynamic(self, state, control):
+        """Apply bicycle kinematics to advance vehicle state by one step.
+
+        Args:
+            state (Tensor): Current state [N_veh, 4] (x, y, psi, v).
+            control (Tensor): Control [N_veh, 2] (pedal, steering).
+
+        Returns:
+            Tensor: Next state [N_veh, 4].
+        """
         x_t = state[:,0]+state[:,3]*torch.cos(state[:,2])*self.dt
         y_t = state[:,1]+state[:,3]*torch.sin(state[:,2])*self.dt
         psi_t = state[:,2]+state[...,3]*self.dt*torch.tan(control[:,1])/2.0

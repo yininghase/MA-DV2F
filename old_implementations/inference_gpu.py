@@ -15,6 +15,31 @@ from data_process import get_problem, load_test_data, load_yaml
 
 
 def inference_gnn(config):
+    """Run inference for GNN-based algorithms on GPU/CPU across a problem collection.
+
+    Loads a trained GNN model (or uses the dynamic velocity field as a reference),
+    executes simulations via sim_run, and optionally collects trajectory data.
+
+    Args:
+        config (dict): Configuration dictionary containing keys:
+            problem (list): [num_vehicles, num_obstacles] for the current task.
+            enable dvf (bool): Whether to use DVF instead of a trained GNN model.
+            model path (str): Path to the trained GNN model checkpoint.
+            collect data (bool): Whether to save simulation data to disk.
+            collect trajectory (bool): Whether to save trajectory data.
+            data folder (str): Directory for saving collected data files.
+            horizon (int): Prediction horizon length (must be 1 for DVF mode).
+            test data souce (str): Either "fixed test data" or "on the fly".
+            test data folder (str): Path to pre-generated test data.
+            test data each case (int): Max test cases per configuration.
+            simulation runs (int): Number of simulation episodes to run.
+            starts (np.ndarray): Initial vehicle states.
+            targets (np.ndarray): Target vehicle states.
+            obstacles (np.ndarray): Obstacle positions and radii.
+
+    Returns:
+        None.
+    """
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print('Device available now:', device)

@@ -7,6 +7,31 @@ def dynamic_velocity_field(starts, targets, obstacles, dt=0.2,
                            safe_distance=1.5, parking_distance=5, 
                            default_v=2.5, vehicle_radius=1.5,
                            pos_tolerance=0.1, ang_tolerance=0.2):
+    """Compute reference states and controls using a dynamic velocity field approach.
+
+    Generates collision-free reference trajectories by computing velocity field
+    vectors that attract vehicles toward targets while avoiding static obstacles
+    and other vehicles. Supports both forward and backward parking maneuvers.
+
+    Args:
+        starts (torch.Tensor): Initial states [batch, N_veh, 4] with (x, y, psi, v).
+        targets (torch.Tensor): Target states [batch, N_veh, 4] with (x, y, psi, v).
+        obstacles (torch.Tensor): Obstacle info [batch, N_obst, 3] with (x, y, radius).
+        dt (float): Time step duration in seconds (default 0.2).
+        pedal_lim (float): Maximum pedal acceleration magnitude (default 1).
+        steering_angle_lim (float): Maximum steering angle in radians (default 0.8).
+        safe_distance (float): Desired minimum separation distance (default 1.5).
+        parking_distance (float): Distance threshold for parking maneuver mode (default 5).
+        default_v (float): Default reference velocity magnitude (default 2.5).
+        vehicle_radius (float): Vehicle radius for collision checking (default 1.5).
+        pos_tolerance (float): Position convergence tolerance (default 0.1).
+        ang_tolerance (float): Angle convergence tolerance (default 0.2).
+
+    Returns:
+        tuple: (ref_states, ref_controls) where
+            ref_states (torch.Tensor): Reference next states [batch, N_veh, 4] with (x, y, psi, v).
+            ref_controls (torch.Tensor): Reference controls [batch, N_veh, 2] with (pedal, steering).
+    """
     
     N_veh = starts.shape[1]
     N_obst = obstacles.shape[1]

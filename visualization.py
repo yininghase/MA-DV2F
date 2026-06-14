@@ -12,6 +12,20 @@ from calculate_metrics import (check_collision_rectangular_circle,
                                check_collision_rectangular_rectangular)
 
 def get_random_obstacle(center, radius, color, circle_obstacle=True):
+    """Generate a random matplotlib patch representing an obstacle.
+
+    With high probability returns a Circle; otherwise randomly creates a
+    convex or concave polygon for visual variety.
+
+    Args:
+        center (tuple): (x, y) center coordinates.
+        radius (float): Obstacle radius.
+        color (str or tuple): Patch colour.
+        circle_obstacle (bool): If True, always return a circle.
+
+    Returns:
+        matplotlib.patches.Patch: The obstacle patch.
+    """
     
     if circle_obstacle or np.random.rand()>0.9:
         obstacle = mpatches.Circle(center, radius, color=color, fill=True)
@@ -56,8 +70,22 @@ def get_random_obstacle(center, radius, color, circle_obstacle=True):
 
 
 class Visualize_Trajectory:
+    """Visualise multi-vehicle trajectories as animations and static plots.
+
+    Supports displaying vehicle rectangles, target markers, obstacle patches,
+    collision events, attention heatmaps (optional), and MPC prediction overlays.
+    """
     def __init__(self, config, show_attention=False):
+        """Initialise the trajectory visualiser.
+
+        Args:
+            config (dict): Configuration dict with plot settings, vehicle/obstacle
+                counts, car size, colours, and save/show flags.
+            show_attention (bool): Whether to overlay attention weights.
         
+        Returns:
+            None.
+        """
         self.config = config
         
         num_colors = max(self.config["num of vehicles"],
@@ -76,7 +104,15 @@ class Visualize_Trajectory:
     # targets: [num_vehicle, [x, y, psi]]
     
     def base_plot(self, is_trajectory):
+        """Set up the figure and draw the static scene (vehicles, targets, obstacles).
+
+        Args:
+            is_trajectory (bool): If True, prepares for trajectory plotting with
+                optimisation/initialisation overlay paths.
         
+        Returns:
+            None.
+        """
         if self.show_attention:
             self.fig = plt.figure(figsize=(2*self.config["figure size"], 
                                         self.config["figure size"]))
@@ -197,6 +233,17 @@ class Visualize_Trajectory:
         self.fig.tight_layout()
     
     def create_video(self, data, predict_opt, predict_model, attention=None):
+        """Create and save/display an animated GIF of the trajectory.
+
+        Args:
+            data (Tensor): Trajectory states [T, V, 4].
+            predict_opt (Tensor, optional): Optimisation-based predictions.
+            predict_model (Tensor, optional): Model-based predictions.
+            attention (Tensor, optional): Attention weights for overlay.
+        
+        Returns:
+            None.
+        """
         self.base_plot(is_trajectory=False)
         self.data = data
         
@@ -224,7 +271,14 @@ class Visualize_Trajectory:
 
 
     def update_plot(self, num):
+        """Animation callback: update vehicle positions, predictions, and attention at frame num.
+
+        Args:
+            num (int): Current frame index.
         
+        Returns:
+            None.
+        """
         data = self.data[num,...]               
 
         for i in range(self.config["num of vehicles"]):
@@ -250,6 +304,14 @@ class Visualize_Trajectory:
                                 labels = [f"vehicle {i+1}" for i in range(self.config["num of vehicles"])])
             
     def plot_trajectory(self, points):
+        """Plot a static trajectory coloured by time step with collision markers.
+
+        Args:
+            points (Tensor): Trajectory points [T, V, 4].
+        
+        Returns:
+            None.
+        """
         self.base_plot(is_trajectory=True)
         max_time = points.shape[0]
         
@@ -301,7 +363,18 @@ class Visualize_Trajectory:
         plt.close()
         
     def car_patch_pos(self, posture):
-        
+        """Convert vehicle posture to the lower-left corner of its rectangular patch for matplotlib rendering.
+
+        Transforms (x, y, psi) vehicle state into the lower-left corner coordinates
+        of the rotated rectangle based on the configured vehicle dimensions.
+
+        Args:
+            posture (np.ndarray): Vehicle state array [..., 3] with columns (x, y, psi).
+
+        Returns:
+            np.ndarray: Transformed patch-corner positions with same shape as input, where the first two
+                columns are the lower-left corner coordinates of the rotated rectangle.
+        """
         posture_new = posture.copy()
         
         posture_new[...,0] = posture[...,0] - np.sin(posture[...,2])*(self.config["car size"][0]/2) \
@@ -312,7 +385,15 @@ class Visualize_Trajectory:
         return posture_new
     
     def calculate_cost(self, coordinates, targets):
-        
+        """Evaluate a cost function combining target distance and obstacle proximity.
+
+        Args:
+            coordinates (np.ndarray): Query positions.
+            targets (np.ndarray): Target positions.
+
+        Returns:
+            np.ndarray: Cost values.
+        """
         dist_cost = self.config["distance_cost"]
         obst_cost = self.config["obstacle_cost"]
         obs_radius = self.config["obstacle_radius"]
@@ -330,8 +411,21 @@ class Visualize_Trajectory:
 
 
 class Visualize_Velocity_Field_Single_Frame:
+    """Visualise the dynamic velocity field for a single ego vehicle in a static scene.
+
+    Shows the reference velocity direction at every grid point, decomposed into
+    target attraction, obstacle avoidance, and inter-vehicle avoidance components.
+    """
     def __init__(self, config):
+        """Initialise the single-frame velocity field visualiser.
+
+        Args:
+            config (dict): Configuration containing ego_vehicle, other_vehicles,
+                obstacles, target, car_size, and visualisation parameters.
         
+        Returns:
+            None.
+        """
         self.config = config 
         self.dt = 0.2
         self.ego_vehicle = np.array(config['ego vehicle'])
@@ -400,103 +494,126 @@ class Visualize_Velocity_Field_Single_Frame:
 
 
     def get_velocity_field(self, query_points, pos_tolerance=0.25):
-            
-            query_points = torch.from_numpy(query_points) 
-            target = torch.from_numpy(self.target)
-            vehicles = torch.from_numpy(self.other_vehicles) 
-            obstacles = torch.from_numpy(self.obstacles)
-            
-            uni_orient_targets = torch.stack((torch.cos(target[2]), 
-                                            torch.sin(target[2])), dim=-1)
-            
-            vec_to_targets = target[None, :2]-query_points[...,:2]
-            dist_to_targets = torch.norm(vec_to_targets, dim=-1, p=2, keepdim=True)
-            uni_vec_targets = vec_to_targets/(dist_to_targets+1e-8)
-            
-            vec_avoid_collision = torch.zeros((len(query_points), 2))
-            
-            ##### obstacle avoiding #####
-            dynamic_safe_distance = torch.tensor(self.dyn_safe_dist_obs).item()
-            vec_to_obstacles = obstacles[None,:,:2]-query_points[:,None,:2]
-            dist_to_obstacles_center = torch.norm(vec_to_obstacles, dim=-1, p=2, keepdim=True)
-            dist_to_obstacles = dist_to_obstacles_center-obstacles[None,:,2:3]-self.vehicle_radius
-            
-            mask_collision = torch.sum(vec_to_obstacles*vec_to_targets[:,None,:], dim=-1)>0
-            mask_collision = mask_collision & (dist_to_obstacles<=dynamic_safe_distance)[...,0]
-            vec_to_obstacles = vec_to_obstacles/(dist_to_obstacles_center+1e-8)
-            
-            vec_back_obstacles = torch.clip(dist_to_obstacles-dynamic_safe_distance, 
-                                            min=-dynamic_safe_distance, 
-                                            max=0)*vec_to_obstacles
-            vec_avoid_obstacles = vec_back_obstacles.clone()
-                        
-            vec_to_obstacles_3d = torch.cat((vec_to_obstacles, torch.zeros_like(dist_to_obstacles)), dim=-1)
-            
-            vec_direct = torch.zeros_like(vec_to_obstacles_3d)
-            vec_direct[...,-1] = 1
-            
-            vec_around_obstacles = torch.cross(vec_direct, vec_to_obstacles_3d, dim=-1)[...,:2]
-            vec_around_obstacles = vec_around_obstacles/(torch.norm(vec_around_obstacles, dim=-1, p=2, keepdim=True)+1e-8)
-            vec_around_obstacles = torch.clip(dist_to_obstacles, 
-                                              min=0, 
-                                              max=dynamic_safe_distance)*vec_around_obstacles
-            vec_around_obstacles[~mask_collision] = 0
-            vec_avoid_obstacles += vec_around_obstacles
-            
-            vec_avoid_collision += torch.sum(vec_avoid_obstacles, dim=1)
-            
-            ##### vehicle avoiding #####
-            dynamic_safe_distance = torch.tensor(self.dyn_safe_dist_veh)[None,:,None]
-            vec_to_vehicles = vehicles[None,:,:2]-query_points[:,None,:2]
-            dist_to_vehicles_center = torch.norm(vec_to_vehicles, dim=-1, p=2, keepdim=True)
-            dist_to_vehicles = dist_to_vehicles_center-2*self.vehicle_radius
-            
-            mask_collision = torch.sum(vec_to_vehicles*vec_to_targets[:,None,:], dim=-1)>0
-            mask_collision = mask_collision & (dist_to_vehicles<=dynamic_safe_distance)[...,0]
-            vec_to_vehicles = vec_to_vehicles/(dist_to_vehicles_center+1e-8)
-            
-            vec_back_vehicles = torch.clip(dist_to_vehicles-dynamic_safe_distance, 
-                                            min=-dynamic_safe_distance, 
-                                            max=torch.zeros_like(dynamic_safe_distance))*vec_to_vehicles
-            vec_avoid_vehicles = vec_back_vehicles.clone()
-            
-            vec_to_vehicles_3d = torch.cat((vec_to_vehicles, torch.zeros_like(dist_to_vehicles)), dim=-1)
-            
-            vec_direct = torch.zeros_like(vec_to_vehicles_3d)
-            vec_direct[...,-1] = 1
-            
-            vec_around_vehicles = torch.cross(vec_direct, vec_to_vehicles_3d, dim=-1)[...,:2]
-            vec_around_vehicles = vec_around_vehicles/(torch.norm(vec_around_vehicles, dim=-1, p=2, keepdim=True)+1e-8)
-            vec_around_vehicles = torch.clip(dist_to_vehicles, 
-                                             min=torch.zeros_like(dynamic_safe_distance), 
-                                             max=dynamic_safe_distance)*vec_around_vehicles
-            vec_around_vehicles[~mask_collision] = 0
-            vec_avoid_vehicles += vec_around_vehicles
-            
-            vec_avoid_collision += torch.sum(vec_avoid_vehicles, dim=1)
+        """Compute the reference velocity direction for each query point.
+
+        Combines target attraction (with parking-mode blending), repulsion from
+        obstacles, tangential flow around obstacles, and other-vehicle avoidance.
+
+        Args:
+            query_points (np.ndarray): Query positions [M, 2].
+            pos_tolerance (float): Distance threshold for "at target".
+
+        Returns:
+            tuple: 9 arrays describing the computed field components.
+        """
+        query_points = torch.from_numpy(query_points) 
+        target = torch.from_numpy(self.target)
+        vehicles = torch.from_numpy(self.other_vehicles) 
+        obstacles = torch.from_numpy(self.obstacles)
+        
+        uni_orient_targets = torch.stack((torch.cos(target[2]), 
+                                        torch.sin(target[2])), dim=-1)
+        
+        vec_to_targets = target[None, :2]-query_points[...,:2]
+        dist_to_targets = torch.norm(vec_to_targets, dim=-1, p=2, keepdim=True)
+        uni_vec_targets = vec_to_targets/(dist_to_targets+1e-8)
+        
+        vec_avoid_collision = torch.zeros((len(query_points), 2))
+        
+        ##### obstacle avoiding #####
+        dynamic_safe_distance = torch.tensor(self.dyn_safe_dist_obs).item()
+        vec_to_obstacles = obstacles[None,:,:2]-query_points[:,None,:2]
+        dist_to_obstacles_center = torch.norm(vec_to_obstacles, dim=-1, p=2, keepdim=True)
+        dist_to_obstacles = dist_to_obstacles_center-obstacles[None,:,2:3]-self.vehicle_radius
+        
+        mask_collision = torch.sum(vec_to_obstacles*vec_to_targets[:,None,:], dim=-1)>0
+        mask_collision = mask_collision & (dist_to_obstacles<=dynamic_safe_distance)[...,0]
+        vec_to_obstacles = vec_to_obstacles/(dist_to_obstacles_center+1e-8)
+        
+        vec_back_obstacles = torch.clip(dist_to_obstacles-dynamic_safe_distance, 
+                                        min=-dynamic_safe_distance, 
+                                        max=0)*vec_to_obstacles
+        vec_avoid_obstacles = vec_back_obstacles.clone()
                     
-            vec_to_targets = uni_vec_targets.clone()
-            
-            mask_stop = (dist_to_targets<pos_tolerance)
-            
-            factor1 = torch.sum(vec_to_targets*uni_orient_targets[None,:], dim=-1, keepdim=True) 
-            factor2 = torch.clip(dist_to_targets, min=0, max=self.parking_distance)/self.parking_distance
-            factor2[~mask_stop] += 1
-            factor = 2*((factor1>=0).float()-0.5)*factor2
-            
-            mask_parking = dist_to_targets[...,0]<=self.parking_distance
-            vec_to_targets[mask_parking] = (uni_orient_targets+factor*vec_to_targets)[mask_parking]
-            vec_to_targets = vec_to_targets/(torch.norm(vec_to_targets, dim=-1, p=2, keepdim=True)+1e-8)
-            
-            vec_ref_orient = vec_to_targets+vec_avoid_collision
-            
-            return vec_ref_orient.numpy(), vec_to_targets.numpy(), vec_avoid_collision.numpy(), \
-                   vec_avoid_vehicles.numpy(), vec_avoid_obstacles.numpy(), \
-                   vec_back_obstacles.numpy(), vec_around_obstacles.numpy(),\
-                   vec_back_vehicles.numpy(), vec_around_vehicles.numpy()
+        vec_to_obstacles_3d = torch.cat((vec_to_obstacles, torch.zeros_like(dist_to_obstacles)), dim=-1)
+        
+        vec_direct = torch.zeros_like(vec_to_obstacles_3d)
+        vec_direct[...,-1] = 1
+        
+        vec_around_obstacles = torch.cross(vec_direct, vec_to_obstacles_3d, dim=-1)[...,:2]
+        vec_around_obstacles = vec_around_obstacles/(torch.norm(vec_around_obstacles, dim=-1, p=2, keepdim=True)+1e-8)
+        vec_around_obstacles = torch.clip(dist_to_obstacles, 
+                                          min=0, 
+                                          max=dynamic_safe_distance)*vec_around_obstacles
+        vec_around_obstacles[~mask_collision] = 0
+        vec_avoid_obstacles += vec_around_obstacles
+        
+        vec_avoid_collision += torch.sum(vec_avoid_obstacles, dim=1)
+        
+        ##### vehicle avoiding #####
+        dynamic_safe_distance = torch.tensor(self.dyn_safe_dist_veh)[None,:,None]
+        vec_to_vehicles = vehicles[None,:,:2]-query_points[:,None,:2]
+        dist_to_vehicles_center = torch.norm(vec_to_vehicles, dim=-1, p=2, keepdim=True)
+        dist_to_vehicles = dist_to_vehicles_center-2*self.vehicle_radius
+        
+        mask_collision = torch.sum(vec_to_vehicles*vec_to_targets[:,None,:], dim=-1)>0
+        mask_collision = mask_collision & (dist_to_vehicles<=dynamic_safe_distance)[...,0]
+        vec_to_vehicles = vec_to_vehicles/(dist_to_vehicles_center+1e-8)
+        
+        vec_back_vehicles = torch.clip(dist_to_vehicles-dynamic_safe_distance, 
+                                        min=-dynamic_safe_distance, 
+                                        max=torch.zeros_like(dynamic_safe_distance))*vec_to_vehicles
+        vec_avoid_vehicles = vec_back_vehicles.clone()
+        
+        vec_to_vehicles_3d = torch.cat((vec_to_vehicles, torch.zeros_like(dist_to_vehicles)), dim=-1)
+        
+        vec_direct = torch.zeros_like(vec_to_vehicles_3d)
+        vec_direct[...,-1] = 1
+        
+        vec_around_vehicles = torch.cross(vec_direct, vec_to_vehicles_3d, dim=-1)[...,:2]
+        vec_around_vehicles = vec_around_vehicles/(torch.norm(vec_around_vehicles, dim=-1, p=2, keepdim=True)+1e-8)
+        vec_around_vehicles = torch.clip(dist_to_vehicles, 
+                                         min=torch.zeros_like(dynamic_safe_distance), 
+                                         max=dynamic_safe_distance)*vec_around_vehicles
+        vec_around_vehicles[~mask_collision] = 0
+        vec_avoid_vehicles += vec_around_vehicles
+        
+        vec_avoid_collision += torch.sum(vec_avoid_vehicles, dim=1)
+                
+        vec_to_targets = uni_vec_targets.clone()
+        
+        mask_stop = (dist_to_targets<pos_tolerance)
+        
+        factor1 = torch.sum(vec_to_targets*uni_orient_targets[None,:], dim=-1, keepdim=True) 
+        factor2 = torch.clip(dist_to_targets, min=0, max=self.parking_distance)/self.parking_distance
+        factor2[~mask_stop] += 1
+        factor = 2*((factor1>=0).float()-0.5)*factor2
+        
+        mask_parking = dist_to_targets[...,0]<=self.parking_distance
+        vec_to_targets[mask_parking] = (uni_orient_targets+factor*vec_to_targets)[mask_parking]
+        vec_to_targets = vec_to_targets/(torch.norm(vec_to_targets, dim=-1, p=2, keepdim=True)+1e-8)
+        
+        vec_ref_orient = vec_to_targets+vec_avoid_collision
+        
+        return vec_ref_orient.numpy(), vec_to_targets.numpy(), vec_avoid_collision.numpy(), \
+               vec_avoid_vehicles.numpy(), vec_avoid_obstacles.numpy(), \
+               vec_back_obstacles.numpy(), vec_around_obstacles.numpy(),\
+               vec_back_vehicles.numpy(), vec_around_vehicles.numpy()
 
 
     def car_patch_pos(self, posture):
+        """Convert vehicle posture to the lower-left corner of its rectangular patch for matplotlib rendering.
+
+        Transforms (x, y, psi) vehicle state into the lower-left corner coordinates
+        of the rotated rectangle based on the configured vehicle dimensions.
+
+        Args:
+            posture (np.ndarray): Vehicle state array [..., 3] with columns (x, y, psi).
+
+        Returns:
+            np.ndarray: Transformed patch-corner positions with same shape as input, where the first two
+                columns are the lower-left corner coordinates of the rotated rectangle.
+        """
         posture_new = posture.copy()
         posture_new[...,0] = posture[...,0]-np.sin(posture[...,2])*(self.car_size[0]/2) \
                                            -np.cos(posture[...,2])*(self.car_size[1]/2)
@@ -505,6 +622,14 @@ class Visualize_Velocity_Field_Single_Frame:
         return posture_new
     
     def get_query_points(self):
+        """Generate query points covering the scene for velocity field evaluation.
+
+        Produces a coarse grid over the full scene, plus dense sampling around
+        obstacles, other vehicles, and the target with annular distance rings.
+
+        Returns:
+            np.ndarray: Query points [M, 2].
+        """
         
         query_points = np.stack(np.meshgrid(np.linspace(-self.fig_range,self.fig_range,
                                                         self.num_points_x_y), 
@@ -578,6 +703,18 @@ class Visualize_Velocity_Field_Single_Frame:
 
 
     def plot_velocity_field(self, only_final_vector=False):
+        """Render the full velocity field visualisation.
+
+        Draws vehicle patches with direction arrows, targets with parking zone,
+        obstacle danger ranges, and all computed velocity vectors. Optionally
+        shows only the final combined field vectors.
+
+        Args:
+            only_final_vector (bool): If True, hide component-level vectors.
+        
+        Returns:
+            None.
+        """
         
         fig = plt.figure(figsize=(self.fig_size,self.fig_size))
         ax = fig.add_subplot()
@@ -744,8 +881,21 @@ class Visualize_Velocity_Field_Single_Frame:
 
 
 class Visualize_Velocity_Field:
+    """Visualise the dynamic velocity field for a selected vehicle over a full trajectory.
+
+    Creates an animation of how the velocity field evolves as the ego vehicle moves,
+    with obstacles and other vehicles also updating their positions.
+    """
     def __init__(self, config):
+        """Initialise the multi-frame velocity field visualiser.
+
+        Args:
+            config (dict): Configuration containing starts, targets, obstacles,
+                num of vehicles/obstacles, and visualisation parameters.
         
+        Returns:
+            None.
+        """
         self.config = config 
         self.dt = 0.2
         self.vehicles = np.array(config['starts'])
@@ -799,6 +949,14 @@ class Visualize_Velocity_Field:
         self.cmap = cmap(np.linspace(0,1,num_colors))[...,:3]
         
     def update_parameters(self, states):
+        """Update dynamic safety distances and predicted next-state range based on current velocities.
+
+        Args:
+            states (np.ndarray): Current states of all agents [N_total, 4].
+        
+        Returns:
+            None.
+        """
         
         self.dyn_safe_dist_obs = self.safe_distance + np.abs(states[:,3])
         self.dyn_safe_dist_veh = self.safe_distance + np.abs(states[:,None,3])+np.abs(states[None,:,3])
@@ -812,6 +970,16 @@ class Visualize_Velocity_Field:
         
 
     def get_velocity_field(self, query_points, states, pos_tolerance=0.25):
+        """Compute the reference velocity direction for query points from the ego vehicle's perspective.
+
+        Args:
+            query_points (np.ndarray): Query positions with yaw appended [M, 3].
+            states (np.ndarray): Current states of all agents [N_total, 4].
+            pos_tolerance (float): Distance threshold for "at target".
+
+        Returns:
+            np.ndarray: Normalised reference orientation vectors [M, 2].
+        """
         
         veh_idx = self.veh_idx
         
@@ -922,6 +1090,18 @@ class Visualize_Velocity_Field:
 
 
     def car_patch_pos(self, posture):
+        """Convert vehicle posture to the lower-left corner of its rectangular patch for matplotlib rendering.
+
+        Transforms (x, y, psi) vehicle state into the lower-left corner coordinates
+        of the rotated rectangle based on the configured vehicle dimensions.
+
+        Args:
+            posture (np.ndarray): Vehicle state array [..., 3] with columns (x, y, psi).
+
+        Returns:
+            np.ndarray: Transformed patch-corner positions with same shape as input, where the first two
+                columns are the lower-left corner coordinates of the rotated rectangle.
+        """
         posture_new = posture.copy()
         posture_new[...,0] = posture[...,0]-np.sin(posture[...,2])*(self.car_size[0]/2) \
                                            -np.cos(posture[...,2])*(self.car_size[1]/2)
@@ -930,6 +1110,14 @@ class Visualize_Velocity_Field:
         return posture_new
     
     def get_query_points(self, states):
+        """Generate query points for the current frame with masking inside obstacles/vehicles/targets.
+
+        Args:
+            states (np.ndarray): Current agent states [N, 4].
+
+        Returns:
+            np.ndarray: Valid query points [M, 2].
+        """
         
         veh_idx = self.veh_idx
         
@@ -964,6 +1152,12 @@ class Visualize_Velocity_Field:
 
 
     def base_plot(self):
+        """Set up the static base scene: vehicles, targets, obstacles, danger ranges, and field vectors.
+
+        Returns:
+            None.
+        """
+
         
         veh_idx = self.veh_idx
 
@@ -1103,6 +1297,15 @@ class Visualize_Velocity_Field:
         return
 
     def create_video(self, trajectorys, veh_idx):
+        """Create an animated GIF of the evolving velocity field over a trajectory.
+
+        Args:
+            trajectorys (np.ndarray): Full trajectory data [T, N_total, 4].
+            veh_idx (int): Index of the ego vehicle to visualise.
+        
+        Returns:
+            None.
+        """
         self.trajectorys = trajectorys
         self.veh_idx = veh_idx
         self.base_plot()
@@ -1122,7 +1325,14 @@ class Visualize_Velocity_Field:
         plt.close()
 
     def update_plot(self, num):
+        """Animation callback: update vehicle/obstacle positions and recompute the velocity field.
+
+        Args:
+            num (int): Current frame index.
         
+        Returns:
+            None.
+        """
         states_t = self.trajectorys[num,...]   
         veh_idx = self.veh_idx
         self.update_parameters(states_t)      

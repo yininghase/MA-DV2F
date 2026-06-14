@@ -5,6 +5,32 @@ from data_process import get_angle_diff
 
 class ModelPredictiveControl:
     def __init__(self, config):
+        """Initialize the MPC controller with problem parameters and cost weights.
+
+        Parses the configuration dictionary, sets up vehicle pairs for collision
+        checking, and validates problem dimensions.
+
+        Args:
+            config (dict): Configuration dictionary containing keys:
+                horizon (int): Prediction horizon length.
+                starts (np.ndarray): Initial vehicle states [N_veh, 4] with (x, y, psi, v).
+                targets (np.ndarray): Target vehicle states [N_veh, 4] with (x, y, psi, v).
+                obstacles (np.ndarray): Obstacle data [N_obst, 3] with (x, y, radius).
+                control init (np.ndarray or None): Initial control sequence.
+                distance cost (float): Weight for position error cost.
+                angle cost (float): Weight for heading error cost.
+                collision cost (float): Weight for vehicle-vehicle collision cost.
+                collision radius (float): Minimum allowed inter-vehicle distance.
+                obstacle cost (float): Weight for obstacle proximity cost.
+                obstacle radius (float): Minimum allowed obstacle distance.
+                velocity cost (float): Weight for velocity limit violation cost.
+                velocity limit (float): Maximum allowable velocity.
+                smoothness cost (float): Weight for control smoothness cost.
+                travel dist cost (float): Weight for travel distance cost.
+
+        Returns:
+            None.
+        """
         self.horizon = config["horizon"]
         self.dt = 0.2
         self.starts = config["starts"]
@@ -32,6 +58,21 @@ class ModelPredictiveControl:
         # print()
 
     def plant_model(self, prev_state, dt, control):
+        """Apply the vehicle dynamic model to compute the next state.
+
+        Uses a simplified bicycle model with first-order velocity dynamics:
+        position integrates with current velocity and heading; heading changes
+        with steering angle; velocity responds to pedal input with drag.
+
+        Args:
+            prev_state (np.ndarray): Current state [..., 4] with (x, y, psi, v).
+            dt (float): Time step duration in seconds.
+            control (np.ndarray): Control inputs [..., 2] with (pedal, steering_angle).
+
+        Returns:
+            np.ndarray: Next state array with same shape as prev_state containing
+                (x, y, psi, v) after one time step of dynamics.
+        """
         
         x_t = prev_state[...,0]
         y_t = prev_state[...,1]
@@ -57,6 +98,23 @@ class ModelPredictiveControl:
         return next_state
 
     def cost_function(self, u, *args):
+        """Evaluate the MPC cost function for a given control sequence.
+
+        Rolls out the vehicle dynamics over the horizon and computes a weighted
+        sum of position error, heading error, obstacle proximity penalties,
+        vehicle-vehicle collision penalties, velocity limit violations,
+        control smoothness, and travel distance.
+
+        Args:
+            u (np.ndarray): Flattened control sequence of length horizon * N_veh * 2,
+                reshaped internally to (horizon, N_veh, 2) for (pedal, steering).
+            *args: Variable length argument list where:
+                args[0] (np.ndarray): Current vehicle states [N_veh, 4].
+                args[1] (np.ndarray): Target states [N_veh, 4].
+
+        Returns:
+            float: Scalar total cost value to be minimized by the optimizer.
+        """
         u = u.reshape(self.horizon, self.num_vehicle, 2)
         
         state = np.array(args[0])

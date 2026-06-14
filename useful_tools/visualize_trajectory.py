@@ -12,6 +12,18 @@ from visualization import Visualize_Trajectory
 from data_process import load_data, load_yaml
 
 def clip_trajectory(states, n_steps=50):
+    """Remove redundant frames after a vehicle has stopped moving.
+
+    Detects when both position and angle changes remain below thresholds
+    for n_steps consecutive frames and truncates the trajectory.
+
+    Args:
+        states (Tensor): Trajectory states [T, V, 4].
+        n_steps (int): Number of consecutive stationary steps to confirm a stop.
+
+    Returns:
+        Tensor: Clipped trajectory [T', V, 4].
+    """
     
     states = torch.cat((states, states[-1:].repeat(n_steps, 1, 1)), dim=0)
     
@@ -36,6 +48,18 @@ def clip_trajectory(states, n_steps=50):
     return states
 
 def visualize_trajectory(config):
+    """Batch visualise trajectories for all (vehicles, obstacles) combinations.
+
+    Loads prediction data, randomly selects trajectories, and creates video
+    animations and static trajectory plots for each selected run.
+
+    Args:
+        config (dict): Configuration from YAML, including data folder, plot folder,
+            selected indices, number of random selections, etc.
+    
+    Returns:
+        None.
+    """
     
     assert os.path.exists(config["data folder"]), \
         f"The given folder of '{config['data folder']}' does not exist!"        

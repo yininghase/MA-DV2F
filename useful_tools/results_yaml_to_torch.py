@@ -9,6 +9,14 @@ from argparse import ArgumentParser
 
 
 def get_angle_diff(angle_diff):
+    """Compute the minimal signed angular difference.
+
+    Args:
+        angle_diff (Tensor): Raw angular differences.
+
+    Returns:
+        Tensor: Signed differences wrapped to [-pi, pi].
+    """
     
     angle_diff_1 = angle_diff%(2*np.pi)
     angle_diff_2 = (-angle_diff)%(2*np.pi)
@@ -18,6 +26,17 @@ def get_angle_diff(angle_diff):
     return angle_diff
 
 def adapt_trajectory(trajectories, starts, flip_yaw=1, map_scale_factor=1):
+    """Match YAML-format trajectories to the correct vehicle index by minimising start-position distance.
+
+    Args:
+        trajectories (dict): Trajectory dictionary from YAML.
+        starts (list): Expected start positions.
+        flip_yaw (int): -1 if yaw needs flipping (left-hand coordinate system).
+        map_scale_factor (float): Scaling factor for coordinate systems.
+
+    Returns:
+        list: Trajectories reordered to match the start-position index.
+    """
     
     trajs = []
     
@@ -42,6 +61,16 @@ def adapt_trajectory(trajectories, starts, flip_yaw=1, map_scale_factor=1):
     return adapted_traj
 
 def transfer_data_yaml_dict_to_tensor(trajectories, time_step, default_state):
+    """Convert a YAML trajectory dictionary at a given time step into a state tensor.
+
+    Args:
+        trajectories (list): List of per-vehicle trajectory lists.
+        time_step (int): Index into each trajectory.
+        default_state (list): Fallback state if time_step exceeds trajectory length.
+
+    Returns:
+        Tensor: State tensor [V, 4] (x, y, yaw, v).
+    """
     
     current_states = copy.deepcopy(default_state)
             

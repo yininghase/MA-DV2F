@@ -6,6 +6,25 @@ from data_process import get_problem, load_yaml
 from argparse import ArgumentParser
 
 def generate_data(config):
+    """Generate synthetic train/test datasets for multi-agent navigation.
+
+    Iterates over a collection of (num_vehicles, num_obstacles) problems, generates
+    random vehicle start/goal states and obstacle positions, and saves them as .pt files.
+
+    Args:
+        config (dict): Configuration dictionary loaded from YAML, containing:
+            - problem_collection: list of [num_vehicles, num_obstacles]
+            - data folder: output directory path
+            - data length each case: number of samples per problem
+            - zero_velocity: whether vehicles start with zero velocity
+            - collision mode: enable densely-packed collision scenarios
+            - parking mode: enable parking scenarios (target near start)
+            - is test data: True for test set, False for training set
+            - position range: spatial range for random placement
+    
+    Returns:
+        None.
+    """
     
     problem_collection = np.array(config["problem collection"], dtype=int)
     assert problem_collection.shape[1] == 2 and \

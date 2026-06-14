@@ -14,6 +14,23 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def check_early_stopping(states, position_tolerance=1.0, angle_tolerance=0.2, 
                          stop_tolerance=0.1, n_steps=10):
+    """Check whether vehicles have reached their targets and should stop.
+
+    Detects when a vehicle has stopped moving (position change < stop_tolerance
+    over n_steps) or has reached the target (position + angle within tolerance),
+    and returns a mask and index for early truncation of trajectories.
+
+    Args:
+        states (Tensor): State sequence [T, B, V, 4].
+        position_tolerance (float): Allowed position error to target.
+        angle_tolerance (float): Allowed angle error to target.
+        stop_tolerance (float): Threshold for detecting a stop.
+        n_steps (int): Consecutive steps below stop_tolerance to confirm stop.
+
+    Returns:
+        tuple[Tensor, Tensor]: traj_mask [L, T] boolean mask per trajectory,
+            traj_idx [L] last valid step index per trajectory.
+    """
     
     pos_diff = torch.norm(torch.diff(states[...,:2], dim=1), p=2, dim=-1)
     L,T,V = pos_diff.shape
@@ -41,32 +58,60 @@ def check_early_stopping(states, position_tolerance=1.0, angle_tolerance=0.2,
     
 
 def run_vehicle_dynamics(prev_state, control, dt=0.2):
-        
-        x_t = prev_state[...,0]
-        y_t = prev_state[...,1]
-        psi_t = prev_state[...,2]
-        v_t = prev_state[...,3]
-        
-        pedal = control[...,0]
-        steering = control[...,1]
+    """Advance vehicle state by one time step using a bicycle kinematics model.
 
-        # Vehicle Dynamic Equation
-        x_t = x_t+v_t*torch.cos(psi_t)*dt
-        y_t = y_t+v_t*torch.sin(psi_t)*dt
-        psi_t = psi_t+v_t*dt*torch.tan(steering)/2.0
-        psi_t = (psi_t+pi)%(2*pi)-pi
-        v_t = 0.99*v_t+pedal*dt
-        
-        next_state = torch.cat((x_t[...,None], y_t[...,None], 
-                                psi_t[...,None], v_t[...,None]), 
-                                dim=-1)
+    Args:
+        prev_state (Tensor): Previous state [..., 4] (x, y, psi, v).
+        control (Tensor): Control command [..., 2] (pedal, steering).
+        dt (float): Time step duration in seconds.
 
-        return next_state
+    Returns:
+        Tensor: Next state [..., 4].
+    """
+    x_t = prev_state[...,0]
+    y_t = prev_state[...,1]
+    psi_t = prev_state[...,2]
+    v_t = prev_state[...,3]
+    
+    pedal = control[...,0]
+    steering = control[...,1]
+
+    # Vehicle Dynamic Equation
+    x_t = x_t+v_t*torch.cos(psi_t)*dt
+    y_t = y_t+v_t*torch.sin(psi_t)*dt
+    psi_t = psi_t+v_t*dt*torch.tan(steering)/2.0
+    psi_t = (psi_t+pi)%(2*pi)-pi
+    v_t = 0.99*v_t+pedal*dt
+    
+    next_state = torch.cat((x_t[...,None], y_t[...,None], 
+                            psi_t[...,None], v_t[...,None]), 
+                            dim=-1)
+
+    return next_state
 
 
 @torch.no_grad()
 def inference_gnn_model(starts, targets, obstacles, model, forward_steps=1, filter_edges=False, 
                         stop_tolerance=0.1, n_steps=10, steering_angle_noise=False):
+    """Run GNN or DVF inference in a closed-loop rollout.
+
+    Iteratively applies the model to generate control commands, simulates
+    vehicle dynamics, and collects states/controls until early stopping.
+
+    Args:
+        starts (Tensor): Initial states [B, V, 4].
+        targets (Tensor): Target states [B, V, 3].
+        obstacles (Tensor): Obstacle data [B, O, 3].
+        model (nn.Module): IterativeGNNModel in inference or DVF mode.
+        forward_steps (int): Maximum rollout steps.
+        filter_edges (bool): Whether to filter edges by proximity.
+        stop_tolerance (float): Stop detection threshold.
+        n_steps (int): Steps to confirm stop.
+        steering_angle_noise (bool): Whether to add noise to steering.
+
+    Returns:
+        tuple: (states, controls, targets, batches, runtime).
+    """
     
     N1,V,_ = starts.shape
     N2,O,_ = obstacles.shape
@@ -131,6 +176,18 @@ def inference_gnn_model(starts, targets, obstacles, model, forward_steps=1, filt
 
 
 def inference_multiple_cases_parallel(config):
+    """Batch inference over multiple (vehicles, obstacles) problem configurations.
+
+    Loads test data (fixed or on-the-fly), runs inference in batches, and
+    saves the resulting states, controls, batches, and trajectory indices to .pt files.
+
+    Args:
+        config (dict): Inference configuration from YAML, containing algorithm type,
+            model path, problem collection, simulation parameters, etc.
+    
+    Returns:
+        None.
+    """
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print('Device available now:', device)
@@ -284,6 +341,17 @@ def inference_multiple_cases_parallel(config):
         pbar.update(B)
 
 def introduce_steering_angle_noise(model_control, sigma=3.0):
+    """Add Gaussian noise to the steering angle for robustness testing.
+
+    Noise standard deviation is proportional to the absolute steering angle.
+
+    Args:
+        model_control (Tensor): Control commands [B, V, 2].
+        sigma (float): Scaling factor for the noise.
+
+    Returns:
+        Tensor: Control commands with added steering noise.
+    """
     theta = torch.abs(model_control[:,:,1])
     offset = torch.normal(torch.zeros_like(theta), sigma*theta+np.pi/90)
     model_control[:,:,1] = torch.clip(model_control[:,:,1] + offset, min=-0.8, max=0.8)

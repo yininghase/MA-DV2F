@@ -15,7 +15,18 @@ from torch_geometric.utils import softmax
 
  
 class LinearBlock(torch.nn.Module):
+    """A single linear layer with batch normalisation and optional ReLU activation."""
     def __init__(self, in_node_num, out_node_num, activation=True):
+        """Initialise the linear block.
+
+        Args:
+            in_node_num (int): Input feature dimension.
+            out_node_num (int): Output feature dimension.
+            activation (bool): Whether to apply ReLU after BN.
+        
+        Returns:
+            None.
+        """
         super().__init__()
         self.activation = activation
         self.linear = Linear(in_node_num, out_node_num, weight_initializer='kaiming_uniform')
@@ -24,6 +35,14 @@ class LinearBlock(torch.nn.Module):
             self.a = ReLU()
         
     def forward(self, x):
+        """Forward pass through the linear block.
+
+        Args:
+            x (Tensor): Input features [N, in_node_num].
+
+        Returns:
+            Tensor: Output features [N, out_node_num].
+        """
         x = self.linear(x)
         x = self.bn(x)
         if self.activation:
@@ -33,7 +52,23 @@ class LinearBlock(torch.nn.Module):
 
 
 class UNet(torch.nn.Module):
+    """U-Net style encoder-decoder that produces key and value features from
+    the concatenated (x_i, x_j - x_i) input for the attention mechanism.
+
+    The encoder compresses to a latent space; two parallel decoders produce
+    skip-connected outputs for the key and the value respectively.
+    """
     def __init__(self, in_node_num, out_node_num, latent_node_num):
+        """Initialise the U-Net encoder-decoder.
+
+        Args:
+            in_node_num (int): Input feature dimension.
+            out_node_num (int): Output feature dimension for both decoders.
+            latent_node_num (int): Latent space dimension.
+        
+        Returns:
+            None.
+        """
         super().__init__()
         
         self.encoder_layer1 = LinearBlock(in_node_num, int(latent_node_num//2))
@@ -46,6 +81,15 @@ class UNet(torch.nn.Module):
         self.decoder2_layer1 = LinearBlock(int(out_node_num//2)+int(latent_node_num//2), out_node_num, activation=False)
         
     def forward(self, x):
+        """Encode input and decode to key and value features.
+
+        Args:
+            x (Tensor): Input tensor [N, in_node_num].
+
+        Returns:
+            tuple[Tensor, Tensor]: Decoded key features [N, out_node_num] and
+                value features [N, out_node_num].
+        """
         
         x1_e = self.encoder_layer1(x)
         x2_e = self.encoder_layer2(x1_e)
@@ -62,6 +106,13 @@ class UNet(torch.nn.Module):
 
 
 class MyTransformerConv(MessagePassing):
+    """Custom Transformer convolution layer with U-Net attention.
+
+    Extends PyG's MessagePassing with a transformer-style attention mechanism
+    where query, key, and value are all derived from the concatenation of source
+    and (target - source) features through a U-Net. Supports gated residual
+    connections via the beta parameter.
+    """
     
     _alpha: OptTensor
 
@@ -76,6 +127,20 @@ class MyTransformerConv(MessagePassing):
         root_weight: bool = True,
         **kwargs,
     ):
+        """Initialise the transformer convolution layer.
+
+        Args:
+            in_channels (int or tuple): Input feature dimension(s).
+            out_channels (int): Output feature dimension.
+            key_query_len (int, optional): Dimension of key/query vectors.
+            beta (bool): Use gated residual connection.
+            dropout (float): Dropout rate for attention weights.
+            bias (bool): Whether to use bias in linear layers.
+            root_weight (bool): Whether to add a linear self-loop.
+        
+        Returns:
+            None.
+        """
         kwargs.setdefault('aggr', 'add')
         super(MyTransformerConv, self).__init__(node_dim=0, **kwargs)
 
@@ -103,7 +168,16 @@ class MyTransformerConv(MessagePassing):
 
     def forward(self, x: Union[Tensor, PairTensor], edge_index: Adj,
                 return_attention_weights=None):
-        
+        """Forward pass: propagate messages along edges with attention.
+
+        Args:
+            x (Tensor or PairTensor): Node features.
+            edge_index (Adj): Graph edge indices.
+            return_attention_weights (bool, optional): Whether to return attention weights.
+
+        Returns:
+            Tensor or tuple: Updated node features, optionally with attention weights.
+        """
         if isinstance(x, Tensor):
             x: PairTensor = (x, x)
 
@@ -132,7 +206,22 @@ class MyTransformerConv(MessagePassing):
 
     def message(self, x_i: Tensor, x_j: Tensor, index: Tensor, ptr: OptTensor,
                 size_i: Optional[int]):
-        
+        """Generate messages by computing attention-weighted values.
+
+        Concatenates (x_i, x_j - x_i), runs through U-Net to get key/value,
+        computes attention scores via query-key dot product, and returns
+        attention-weighted values.
+
+        Args:
+            x_i (Tensor): Source node features.
+            x_j (Tensor): Target node features.
+            index (Tensor): Edge index mapping.
+            ptr (OptTensor): Pointer for CSR format.
+            size_i (Optional[int]): Size of source dimension.
+
+        Returns:
+            Tensor: Attention-weighted messages.
+        """
         x = torch.cat([x_i, x_j - x_i], dim=-1)
         query = self.query_bn(x)
         key, value = self.unet(x)
@@ -149,5 +238,10 @@ class MyTransformerConv(MessagePassing):
         return out
 
     def __repr__(self):
+        """String representation of the layer.
+
+        Returns:
+            str: Descriptor string with class name and channel dimensions.
+        """
         return (f'{self.__class__.__name__}({self.in_channels}, '
                 f'{self.out_channels})')

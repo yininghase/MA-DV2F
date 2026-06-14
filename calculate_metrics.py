@@ -6,7 +6,20 @@ from itertools import combinations
 
 from data_process import load_data, load_yaml
 
-def calculate_metrics(config): 
+def calculate_metrics(config):
+    """Compute all evaluation metrics for inference results.
+
+    Iterates over (vehicles, obstacles) combinations, loads trajectory data,
+    and computes: success rate, collision rate, reach rate, safe rate,
+    intermediate success rates at various time steps, and trajectory efficiency.
+
+    Args:
+        config (dict): Metric configuration from YAML, containing data folder paths,
+            vehicle/obstacle counts, tolerances, and intermediate time steps.
+    
+    Returns:
+        None.
+    """
     
     assert os.path.exists(config["data folder"]), \
         f"The given folder of '{config['data folder']}' does not exist!"        
@@ -155,6 +168,22 @@ def calculate_metrics(config):
                
 
 def calculate_collision_times(states, vehicle_size, num_vehicles, num_obstacles, memory_limit=1e7):
+    """Detect all vehicle-vehicle and vehicle-obstacle collision events.
+
+    Uses batched collision detection to handle large state tensors within
+    a configurable memory limit. Returns timestamps and participant indices
+    for each collision.
+
+    Args:
+        states (Tensor): State sequence [T, N_total, 8].
+        vehicle_size (list): [length, width] of the rectangular vehicle.
+        num_vehicles (int): Number of vehicles.
+        num_obstacles (int): Number of obstacles.
+        memory_limit (float): Max elements per batch to avoid OOM.
+
+    Returns:
+        Tensor: Collision events [C, 3] where each row is (time, idx1, idx2).
+    """
     
     collisions = []
     
@@ -212,6 +241,19 @@ def calculate_collision_times(states, vehicle_size, num_vehicles, num_obstacles,
     return collisions
 
 def check_collision_rectangular_circle_batch(vehicle_states, obstacle_states, vehicle_size):
+    """Batch collision detection between rectangular vehicles and circular obstacles.
+
+    Transforms obstacles into each vehicle's local frame and checks if the
+    minimum distance from the rectangle to the circle centre is within the radius.
+
+    Args:
+        vehicle_states (Tensor): Vehicle states [T, V, 8].
+        obstacle_states (Tensor): Obstacle states [T, O, 8].
+        vehicle_size (list): [length, width] of the rectangle.
+
+    Returns:
+        Tensor: Collision flags [T, V, O] (1 = collision, 0 = no collision).
+    """
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
@@ -238,6 +280,18 @@ def check_collision_rectangular_circle_batch(vehicle_states, obstacle_states, ve
 
 
 def check_collision_rectangular_rectangular_batch(vehicle_states_comb, vehicle_size):
+    """Batch collision detection between pairs of rectangular vehicles.
+
+    Uses the Separating Axis Theorem (SAT): projects both rectangles onto
+    each rectangle's local axes; if any axis separates them, no collision.
+
+    Args:
+        vehicle_states_comb (Tensor): Paired states [2, C, T, 8] for C combinations.
+        vehicle_size (list): [length, width] of the rectangle.
+
+    Returns:
+        Tensor: Collision flags [T, C].
+    """
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
@@ -279,6 +333,16 @@ def check_collision_rectangular_rectangular_batch(vehicle_states_comb, vehicle_s
     return ~not_collision.cpu().long()
 
 def check_collision_rectangular_circle(state_rect, state_cir, vehicle_size):
+    """Single-pair collision check between a rectangle vehicle and a circle obstacle.
+
+    Args:
+        state_rect (Tensor): Rectangle state [T, 8].
+        state_cir (Tensor): Circle state [T, 8].
+        vehicle_size (list): [length, width].
+
+    Returns:
+        Tensor: Collision flag [T] (bool).
+    """
     
     assert len(state_rect) == len(state_cir) or len(state_cir) == 1, \
         "Mismatch of data length in collision check of one vehicle and one obstacle!"
@@ -301,6 +365,16 @@ def check_collision_rectangular_circle(state_rect, state_cir, vehicle_size):
     return collision
 
 def check_collision_rectangular_rectangular(state_1, state_2, vehicle_size):
+    """Single-pair collision check between two rectangular vehicles (SAT).
+
+    Args:
+        state_1 (Tensor): First vehicle state [T, 8].
+        state_2 (Tensor): Second vehicle state [T, 8].
+        vehicle_size (list): [length, width].
+
+    Returns:
+        Tensor: Collision flags [T] (bool).
+    """
     
     assert len(state_1) == len(state_2), \
         "Mismatch of data length in collision check of two vehicles!"
@@ -358,6 +432,25 @@ def check_collision_rectangular_rectangular(state_1, state_2, vehicle_size):
 def calculate_reach_goal(final_states, collisions, trajectory_idx, position_tolerance, 
                          angle_tolerance, num_vehicles, num_obstacles, consider_angle=True,
                          return_states_detail=False):
+    """Determine which vehicles successfully reached their goals without collision.
+
+    A vehicle is considered successful if it is within position_tolerance and
+    angle_tolerance of its target and has not collided with any other agent.
+
+    Args:
+        final_states (Tensor): Final states [N_traj, V, 8].
+        collisions (Tensor): Collision events [C, 3].
+        trajectory_idx (Tensor): Trajectory boundary indices.
+        position_tolerance (float): Max allowed position error.
+        angle_tolerance (float): Max allowed angle error.
+        num_vehicles (int): Number of vehicles.
+        num_obstacles (int): Number of obstacles.
+        consider_angle (bool): Whether to check angle alignment.
+        return_states_detail (bool): Also return reach and safe masks separately.
+
+    Returns:
+        Tensor or tuple: success mask, optionally (success, reach, safe).
+    """
     
     vehicle_collisions = torch.zeros((len(trajectory_idx)-1,num_vehicles+num_obstacles), dtype=bool)
     if len(collisions)>0:
@@ -388,6 +481,19 @@ def calculate_reach_goal(final_states, collisions, trajectory_idx, position_tole
 
 
 def calculate_trajectory_efficiency(trajectory_distance, start, goal, success_index):
+    """Compute trajectory efficiency as the ratio of straight-line distance to actual travel distance.
+
+    Only considers successful trajectories.
+
+    Args:
+        trajectory_distance (Tensor): Actual travel distances [N_traj, V].
+        start (Tensor): Start positions [N_traj, V, 2].
+        goal (Tensor): Goal positions [N_traj, V, 2].
+        success_index (Tensor): Boolean mask of successful trajectories.
+
+    Returns:
+        Tensor: Average efficiency ratio (scalar).
+    """
         
     start_goal_distance = torch.norm(start-goal, p=2, dim=-1)[success_index]
     trajectory_distance = trajectory_distance[success_index]

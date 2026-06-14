@@ -14,6 +14,23 @@ from data_process import load_train_data, load_yaml, GNN_DataLoader, GNN_Dataset
 
 
 def train_self_supervised(config):
+    """Self-supervised training loop for the IterativeGNNModel.
+
+    Loads training and validation datasets, initializes the GNN model with a
+    self-supervised learning loss, and trains with early stopping and learning
+    rate scheduling. The model learns to mimic the Dynamic Velocity Field (DVF)
+    reference without ground-truth labels.
+
+    Args:
+        config (dict): Training configuration loaded from YAML, containing:
+            - horizon, batch size, batch split, learning rate, etc.
+            - num of vehicles/obstacles, data folder paths
+            - model folder/name, pretrained model path
+            - augmentation, random offset, patience, etc.
+    
+    Returns:
+        None.
+    """
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print('Device available now:', device)

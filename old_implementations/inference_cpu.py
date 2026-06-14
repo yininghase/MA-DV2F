@@ -14,6 +14,29 @@ from data_process import get_problem, load_test_data, load_yaml
 
 
 def inference_others(config):
+    """Run inference for non-GNN (MPC/DVF) algorithms on CPU across a problem collection.
+
+    Loads or generates test problems, executes the configured algorithm via sim_run,
+    and optionally collects trajectory data for each scenario.
+
+    Args:
+        config (dict): Configuration dictionary containing keys:
+            problem (list): [num_vehicles, num_obstacles] for the current task.
+            collect data (bool): Whether to save simulation data to disk.
+            collect trajectory (bool): Whether to save trajectory data.
+            data folder (str): Directory for saving collected data files.
+            test data souce (str): Either "fixed test data" or "on the fly".
+            test data folder (str): Path to pre-generated test data.
+            test data each case (int): Max test cases per configuration.
+            simulation runs (int): Number of simulation episodes to run.
+            run other algorithm (str): Algorithm name, e.g., "mpc" or "dvf".
+            starts (np.ndarray): Initial vehicle states.
+            targets (np.ndarray): Target vehicle states.
+            obstacles (np.ndarray): Obstacle positions and radii.
+
+    Returns:
+        None.
+    """
     
     problem = np.array(config['problem'])
     assert problem.shape == (2,) and problem[0] >= 1 and problem[1] >= 0, \

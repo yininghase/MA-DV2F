@@ -11,6 +11,18 @@ from data_process import load_yaml, get_problem
 
 
 def visualize_velocity_field_single_frame(config):
+    """Generate single-frame velocity field visualisations for a set of problems.
+
+    Creates sample navigation problems and visualises the dynamic velocity field
+    from the perspective of the ego vehicle.
+
+    Args:
+        config (dict): Configuration from YAML, including problem (num_veh, num_obs),
+            num examples each case, plot folder, etc.
+    
+    Returns:
+        None.
+    """
     
     num_vehicles, num_obstacles = config['problem']
     data_length = config['num examples each case']

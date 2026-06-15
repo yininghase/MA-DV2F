@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
@@ -8,41 +8,42 @@
   <meta property="og:title" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field"/>
   <meta property="og:description" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field"/>
   <meta property="og:url" content="https://yininghase.github.io/MA-DV2F/"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <!-- <meta property="og:image" content="images/overview.jpg" /> -->
-  <!-- <meta property="og:image:width" content="1245"/> -->
-  <!-- <meta property="og:image:height" content="562"/> -->
+  <!-- Open Graph / Twitter social banner -->
+  <meta property="og:image" content="https://yininghase.github.io/MA-DV2F/images/pipeline_overview.png" />
+  <meta property="og:image:width" content="1245"/>
+  <meta property="og:image:height" content="562"/>
 
-
-  <!-- <meta name="twitter:title" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field"> -->
-  <!-- <meta name="twitter:description" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field"> -->
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <!-- <meta name="twitter:image" content="images/overview.jpg"> -->
-  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <meta name="twitter:title" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field">
+  <meta name="twitter:description" content="MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field">
+  <meta name="twitter:image" content="https://yininghase.github.io/MA-DV2F/images/pipeline_overview.png">
+  <meta name="twitter:card" content="summary_large_image">
   <!-- Keywords for your paper to be indexed by-->
   <meta name="keywords" content="Multi Autonomous Vehicle Control, Dynamic Velocity Vector Field">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="canonical" href="https://yininghase.github.io/MA-DV2F/">
+  <meta name="robots" content="index, follow">
 
   <title>MA-DV2F: A Multi-Agent Navigation Framework using Dynamic Velocity Vector Field</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.icon">
+  <link rel="icon" type="image/png" href="static/images/favicon.png">
+
+  <!-- Preconnect to external origins for faster resource loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/index.js"></script>
 </head>
 <body>
   
@@ -55,11 +56,11 @@
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="https://github.com/yininghase" target="_blank">Yining Ma<sup>1,2</sup></a>,</span>
+                <a href="https://github.com/yininghase" target="_blank" rel="noopener noreferrer">Yining Ma<sup>1,2</sup></a>,</span>
                 <span class="author-block">
-                <a href="https://cvg.cit.tum.de/members/khamuham" target="_blank">Qadeer Khan<sup>1,2</sup></a>,</span>
+                <a href="https://cvg.cit.tum.de/members/khamuham" target="_blank" rel="noopener noreferrer">Qadeer Khan<sup>1,2</sup></a>,</span>
                 <span class="author-block">
-                <a href="https://cvg.cit.tum.de/members/cremers" target="_blank">Daniel Cremers<sup>1,2</sup></a></span>
+                <a href="https://cvg.cit.tum.de/members/cremers" target="_blank" rel="noopener noreferrer">Daniel Cremers<sup>1,2</sup></a></span>
             </div>
 
             <div class="is-size-5 publication-authors">
@@ -72,7 +73,7 @@
               <div class="publication-links">
                     <!-- Arxiv PDF link -->
                 <span class="link-block">
-                  <a href="https://ieeexplore.ieee.org/document/10960653" target="_blank"
+                  <a href="https://ieeexplore.ieee.org/document/10960653" target="_blank" rel="noopener noreferrer"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
@@ -83,7 +84,7 @@
 
               <!-- Supplementary PDF link -->
               <span class="link-block">
-                <a href="supplementary.pdf" target="_blank"
+                <a href="supplementary.pdf" target="_blank" rel="noopener noreferrer"
                 class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <i class="fas fa-file-pdf"></i>
@@ -94,7 +95,7 @@
 
               <!-- Github link -->
               <span class="link-block">
-                <a href="https://github.com/yininghase/MA-DV2F" target="_blank"
+                <a href="https://github.com/yininghase/MA-DV2F" target="_blank" rel="noopener noreferrer"
                 class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <i class="fab fa-github"></i>
@@ -105,7 +106,7 @@
 
                 <!-- ArXiv abstract Link -->
               <span class="link-block">
-                <a href="http://arxiv.org/abs/2411.06404" target="_blank"
+                <a href="http://arxiv.org/abs/2411.06404" target="_blank" rel="noopener noreferrer"
                 class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <i class="ai ai-arxiv"></i>
@@ -124,7 +125,7 @@
 <section class="hero teaser" id="Video-Introduction">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
+      <video poster="" id="tree" autoplay controls muted loop height="100%" playsinline preload="metadata">
         <!-- Your video here -->
         <source src="images/video_introduction.mp4"
         type="video/mp4">
@@ -178,7 +179,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered is-four-fifths">
       <div class="column is-four-fifths is-centered">
-          <img src="images/pipeline_overview.png" alt="MY ALT TEXT"/>
+          <img src="images/pipeline_overview.png" alt="MA-DV2F pipeline overview showing multi-agent navigation framework using dynamic velocity vector field" loading="eager">
       </div> 
     </div>
   </div>
@@ -197,22 +198,21 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="95%">
             <tr>
               <td>
-                <img src="./images/velocity_field/vehicle_0_dvf.gif">
+                <img src="./images/velocity_field/vehicle_0_dvf.gif" loading="lazy" alt="Velocity vector field visualization for the blue vehicle">
                 <h2 class="subtitle has-text-centered"> Velocity Vector Field of the Blue Vehicle</h2>
               </td>
               <td>
-                <img src="./images/velocity_field/vehicle_1_dvf.gif">
+                <img src="./images/velocity_field/vehicle_1_dvf.gif" loading="lazy" alt="Velocity vector field visualization for the purple vehicle">
                 <h2 class="subtitle has-text-centered"> Velocity Vector Field of the Purple Vehicle</h2>
               </td>
             </tr>
-            <br /> 
             <tr>
               <td>
-                <img src="./images/velocity_field/vehicle_2_dvf.gif">
+                <img src="./images/velocity_field/vehicle_2_dvf.gif" loading="lazy" alt="Velocity vector field visualization for the pink vehicle">
                 <h2 class="subtitle has-text-centered"> Velocity Vector Field of the Pink Vehicle</h2>
               </td>
               <td>
-                <img src="./images/velocity_field/vehicle_3_dvf.gif">
+                <img src="./images/velocity_field/vehicle_3_dvf.gif" loading="lazy" alt="Velocity vector field visualization for the red vehicle">
                 <h2 class="subtitle has-text-centered"> Velocity Vector Field of the Red Vehicle </h2>
               </td>
             </tr>
@@ -233,7 +233,7 @@
       <h2 class="title is-4">
         Statistic Results:
       </h2>
-      <div id="results-carousel" class="carousel results-carousel">
+      <div id="results-carousel-1" class="carousel results-carousel">
         <div class="item">
           <h2 class="subtitle has-text-centered">Success Rate</h2>
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
@@ -593,10 +593,10 @@
             </tr>
             <tr>
               <td>
-                <img src="./images/model_comparison/success_rate_no_obstacles_comparison.png">
+                <img src="./images/model_comparison/success_rate_no_obstacles_comparison.png" loading="lazy" alt="Comparison chart of success rate no obstacles">
               </td>
               <td>
-                <img src="./images/model_comparison/success_rate_25_obstacles_comparison.png">
+                <img src="./images/model_comparison/success_rate_25_obstacles_comparison.png" loading="lazy" alt="Comparison chart of success rate 25 obstacles">
               </td>
             </tr>
           </table>
@@ -960,10 +960,10 @@
             </tr>
             <tr>
               <td>
-                <img src="./images/model_comparison/reach_rate_no_obstacles_comparison.png">
+                <img src="./images/model_comparison/reach_rate_no_obstacles_comparison.png" loading="lazy" alt="Comparison chart of reach rate no obstacles">
               </td>
               <td>
-                <img src="./images/model_comparison/reach_rate_25_obstacles_comparison.png">
+                <img src="./images/model_comparison/reach_rate_25_obstacles_comparison.png" loading="lazy" alt="Comparison chart of reach rate 25 obstacles">
               </td>
             </tr>
           </table>
@@ -1327,10 +1327,10 @@
             </tr>
             <tr>
               <td>
-                <img src="./images/model_comparison/safe_rate_no_obstacles_comparison.png">
+                <img src="./images/model_comparison/safe_rate_no_obstacles_comparison.png" loading="lazy" alt="Comparison chart of safe rate no obstacles">
               </td>
               <td>
-                <img src="./images/model_comparison/safe_rate_25_obstacles_comparison.png">
+                <img src="./images/model_comparison/safe_rate_25_obstacles_comparison.png" loading="lazy" alt="Comparison chart of safe rate 25 obstacles">
               </td>
             </tr>
           </table>
@@ -1341,34 +1341,34 @@
       <h2 class="title is-4">
       Visualization Examples:
       </h2>
-      <div id="results-carousel" class="carousel results-carousel">
+      <div id="results-carousel-2" class="carousel results-carousel">
         <div class="item">
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=10_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=10_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=10_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=10_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=10_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=10_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=10_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=10_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=10_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=10_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=10_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=10_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1379,29 +1379,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=10_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=10_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 10 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=10_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=10_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 10 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=10_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=10_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 10 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=10_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=10_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 10 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=10_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=10_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 10 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=10_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=10_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 10 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1412,29 +1412,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=20_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=20_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 20 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=20_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=20_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 20 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=20_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=20_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 20 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=20_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=20_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 20 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=20_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=20_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 20 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=20_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=20_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 20 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1445,29 +1445,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=20_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=20_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 20 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=20_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=20_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 20 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=20_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=20_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 20 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=20_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=20_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 20 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=20_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=20_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 20 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=20_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=20_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 20 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1478,29 +1478,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=30_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=30_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 30 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=30_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=30_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 30 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=30_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=30_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 30 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=30_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=30_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 30 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=30_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=30_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 30 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=30_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=30_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 30 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1511,29 +1511,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=30_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=30_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 30 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=30_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=30_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 30 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=30_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=30_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 30 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=30_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=30_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 30 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=30_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=30_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 30 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=30_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=30_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 30 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1544,29 +1544,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=40_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=40_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 40 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=40_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=40_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 40 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=40_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=40_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 40 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=40_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=40_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 40 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=40_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=40_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 40 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=40_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=40_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 40 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1577,29 +1577,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=40_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=40_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 40 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=40_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=40_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 40 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=40_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=40_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 40 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=40_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=40_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 40 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=40_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=40_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 40 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=40_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=40_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 40 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1610,29 +1610,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=50_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=50_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 50 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=50_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=50_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 50 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=50_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=50_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 50 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=50_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=50_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 50 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=50_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=50_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 50 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=50_obstacle=0_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=50_obstacle=0_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 50 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1643,29 +1643,29 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/hard_examples/DVF/vehicle=50_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/DVF/vehicle=50_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of DVF with 50 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> MA-DV<sup>2</sup>F (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/self_supervised_model/vehicle=50_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/self_supervised_model/vehicle=50_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of self_supervised_model with 50 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> self-supervised GNN (ours) </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/CSDO/vehicle=50_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CSDO/vehicle=50_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CSDO with 50 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CSDO [1] </h2>
               </td>
             </tr>
             <tr>
               <td>
-                <img src="./images/hard_examples/CL-CBS/vehicle=50_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/CL-CBS/vehicle=50_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of CL-CBS with 50 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> CL-MAPF [2] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/GCBFplus/vehicle=50_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/GCBFplus/vehicle=50_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of GCBFplus with 50 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> GCBF+ [3] </h2>
               </td>
               <td>
-                <img src="./images/hard_examples/supervised_model/vehicle=50_obstacle=25_run=0.gif">
+                <img src="./images/hard_examples/supervised_model/vehicle=50_obstacle=25_run=0.gif" loading="lazy" alt="Simulation comparison of supervised_model with 50 vehicles and 25 obstacles">
                 <h2 class="subtitle has-text-centered"> supervised GNN [4] </h2>
               </td>
             </tr>
@@ -1701,7 +1701,7 @@
       <h2 class="title is-3">
           Intermediate Success Rate
       </h2>
-      <div id="results-carousel" class="carousel results-carousel">
+      <div id="results-carousel-3" class="carousel results-carousel">
         <div class="item">
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
@@ -1886,10 +1886,10 @@
                 </table>
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_10_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_10_vehicles_no_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 10 vehicles no obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_10_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_10_vehicles_no_obstacles.png" loading="lazy" alt="Plot of differential success rate 10 vehicles no obstacles">
               </td>
             </tr>
           </table>
@@ -2079,10 +2079,10 @@
                 </table>                
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_10_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_10_vehicles_25_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 10 vehicles 25 obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_10_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_10_vehicles_25_obstacles.png" loading="lazy" alt="Plot of differential success rate 10 vehicles 25 obstacles">
               </td>
             </tr>
           </table>
@@ -2272,10 +2272,10 @@
                 </table>                
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_20_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_20_vehicles_no_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 20 vehicles no obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_20_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_20_vehicles_no_obstacles.png" loading="lazy" alt="Plot of differential success rate 20 vehicles no obstacles">
               </td>
             </tr>
           </table>
@@ -2465,10 +2465,10 @@
                 </table>                              
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_20_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_20_vehicles_25_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 20 vehicles 25 obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_20_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_20_vehicles_25_obstacles.png" loading="lazy" alt="Plot of differential success rate 20 vehicles 25 obstacles">
               </td>
             </tr>
           </table>
@@ -2658,10 +2658,10 @@
                 </table>                                             
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_30_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_30_vehicles_no_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 30 vehicles no obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_30_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_30_vehicles_no_obstacles.png" loading="lazy" alt="Plot of differential success rate 30 vehicles no obstacles">
               </td>
             </tr>
           </table>
@@ -2851,10 +2851,10 @@
                 </table>                                                            
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_30_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_30_vehicles_25_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 30 vehicles 25 obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_30_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_30_vehicles_25_obstacles.png" loading="lazy" alt="Plot of differential success rate 30 vehicles 25 obstacles">
               </td>
             </tr>
           </table>
@@ -3044,10 +3044,10 @@
                 </table>                                                                          
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_40_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_40_vehicles_no_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 40 vehicles no obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_40_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_40_vehicles_no_obstacles.png" loading="lazy" alt="Plot of differential success rate 40 vehicles no obstacles">
               </td>
             </tr>
           </table>
@@ -3237,10 +3237,10 @@
                 </table>                                                                                          
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_40_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_40_vehicles_25_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 40 vehicles 25 obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_40_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_40_vehicles_25_obstacles.png" loading="lazy" alt="Plot of differential success rate 40 vehicles 25 obstacles">
               </td>
             </tr>
           </table>
@@ -3430,10 +3430,10 @@
                 </table>                                                                                                        
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_50_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_50_vehicles_no_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 50 vehicles no obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_50_vehicles_no_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_50_vehicles_no_obstacles.png" loading="lazy" alt="Plot of differential success rate 50 vehicles no obstacles">
               </td>
             </tr>
           </table>
@@ -3623,10 +3623,10 @@
                 </table>                                                                                                                       
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/intermediate_success_rate_50_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/intermediate_success_rate_50_vehicles_25_obstacles.png" loading="lazy" alt="Plot of intermediate success rate 50 vehicles 25 obstacles">
               </td>
               <td width="28.5%">
-                <img src="./images/success_rate/differential_success_rate_50_vehicles_25_obstacles.png">
+                <img src="./images/success_rate/differential_success_rate_50_vehicles_25_obstacles.png" loading="lazy" alt="Plot of differential success rate 50 vehicles 25 obstacles">
               </td>
             </tr>
           </table>
@@ -3644,80 +3644,80 @@
       <h2 class="title is-3">
         Roundabout Driving Behavior
       </h2>
-      <div id="results-carousel" class="carousel results-carousel">
+      <div id="results-carousel-4" class="carousel results-carousel">
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=30_obstacle=0_run=0.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=30_obstacle=0_run=0.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=30_obstacle=0_run=1.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=30_obstacle=0_run=1.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=30_obstacle=0_run=2.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=30_obstacle=0_run=2.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=30_obstacle=0_run=3.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=30_obstacle=0_run=3.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=25_run=0.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=25_run=0.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=25_run=1.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=25_run=1.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=0_run=0.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=0_run=0.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=0_run=1.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=0_run=1.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=0_run=2.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=20_obstacle=0_run=2.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=25_run=0.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=25_run=0.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=25_run=1.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=25_run=1.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=25_run=2.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=25_run=2.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=0_run=0.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=0_run=0.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=0_run=1.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=0_run=1.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=0_run=2.gif">
+            <img src="./images/roundabout_examples/DVF/vehicle=10_obstacle=0_run=2.gif" loading="lazy" alt="Roundabout simulation scenario">
           </div>
         </div>
       </div>
@@ -3732,40 +3732,40 @@
       <h2 class="title is-3">
         Largescale Scenario Performance
       </h2>
-      <div id="results-carousel" class="carousel results-carousel">
+      <div id="results-carousel-5" class="carousel results-carousel">
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/largescale_examples/DVF/vehicle=100_obstacle=0_run=0.gif">
+            <img src="./images/largescale_examples/DVF/vehicle=100_obstacle=0_run=0.gif" loading="lazy" alt="Large-scale simulation with 100 vehicles and 0 obstacles">
           </div>
           <h2 class="subtitle has-text-centered"> 100 Vehicles, no Obstacles </h2>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/largescale_examples/DVF/vehicle=100_obstacle=125_run=0.gif">
+            <img src="./images/largescale_examples/DVF/vehicle=100_obstacle=125_run=0.gif" loading="lazy" alt="Large-scale simulation with 100 vehicles and 125 obstacles">
           </div>
           <h2 class="subtitle has-text-centered"> 100 Vehicles, 125 Obstacles </h2>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/largescale_examples/DVF/vehicle=125_obstacle=0_run=0.gif">
+            <img src="./images/largescale_examples/DVF/vehicle=125_obstacle=0_run=0.gif" loading="lazy" alt="Large-scale simulation with 125 vehicles and 0 obstacles">
           </div>
           <h2 class="subtitle has-text-centered"> 125 Vehicles, no Obstacles </h2>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/largescale_examples/DVF/vehicle=125_obstacle=125_run=0.gif">
+            <img src="./images/largescale_examples/DVF/vehicle=125_obstacle=125_run=0.gif" loading="lazy" alt="Large-scale simulation with 125 vehicles and 125 obstacles">
           </div>
           <h2 class="subtitle has-text-centered"> 125 Vehicles, 125 Obstacles </h2>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/largescale_examples/DVF/vehicle=250_obstacle=0_run=0.gif">
+            <img src="./images/largescale_examples/DVF/vehicle=250_obstacle=0_run=0.gif" loading="lazy" alt="Large-scale simulation with 250 vehicles and 0 obstacles">
           </div>
           <h2 class="subtitle has-text-centered"> 250 Vehicles, no Obstacles </h2>
         </div>
         <div class="item">
           <div class="columns is-centered">
-            <img src="./images/largescale_examples/DVF/vehicle=250_obstacle=125_run=0.gif">
+            <img src="./images/largescale_examples/DVF/vehicle=250_obstacle=125_run=0.gif" loading="lazy" alt="Large-scale simulation with 250 vehicles and 125 obstacles">
           </div>
           <h2 class="subtitle has-text-centered"> 250 Vehicles, 125 Obstacles </h2>
         </div>
@@ -3784,7 +3784,7 @@
       <h2 class="title is-4">
         Statistic Results:
       </h2>
-      <div id="results-carousel" class="carousel results-carousel">
+      <div id="results-carousel-6" class="carousel results-carousel">
         <div class="item">
           <h2 class="subtitle has-text-centered">Success Rate</h2>
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
@@ -4060,10 +4060,10 @@
             </tr>
             <tr>
               <td>
-                <img src="./images/sensitivity_analysis/success_rate_no_obstacles_sensitivity.png">
+                <img src="./images/sensitivity_analysis/success_rate_no_obstacles_sensitivity.png" loading="lazy" alt="Sensitivity comparison chart of success rate no obstacles">
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/success_rate_25_obstacles_sensitivity.png">
+                <img src="./images/sensitivity_analysis/success_rate_25_obstacles_sensitivity.png" loading="lazy" alt="Sensitivity comparison chart of success rate 25 obstacles">
               </td>
             </tr>
           </table>
@@ -4343,10 +4343,10 @@
             </tr>
             <tr>
               <td>
-                <img src="./images/sensitivity_analysis/reach_rate_no_obstacles_sensitivity.png">
+                <img src="./images/sensitivity_analysis/reach_rate_no_obstacles_sensitivity.png" loading="lazy" alt="Sensitivity comparison chart of reach rate no obstacles">
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/reach_rate_25_obstacles_sensitivity.png">
+                <img src="./images/sensitivity_analysis/reach_rate_25_obstacles_sensitivity.png" loading="lazy" alt="Sensitivity comparison chart of reach rate 25 obstacles">
               </td>
             </tr>
           </table>
@@ -4626,10 +4626,10 @@
             </tr>
             <tr>
               <td>
-                <img src="./images/sensitivity_analysis/safe_rate_no_obstacles_sensitivity.png">
+                <img src="./images/sensitivity_analysis/safe_rate_no_obstacles_sensitivity.png" loading="lazy" alt="Sensitivity comparison chart of safe rate no obstacles">
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/safe_rate_25_obstacles_sensitivity.png">
+                <img src="./images/sensitivity_analysis/safe_rate_25_obstacles_sensitivity.png" loading="lazy" alt="Sensitivity comparison chart of safe rate 25 obstacles">
               </td>
             </tr>
           </table>
@@ -4640,20 +4640,20 @@
       <h2 class="title is-4">
       Visualization Examples:
       </h2>
-      <div id="results-carousel" class="carousel results-carousel">
+      <div id="results-carousel-7" class="carousel results-carousel">
         <div class="item">
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=1.gif">
+                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=1.gif" loading="lazy" alt="Sensitivity analysis (r_c = 0.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=0.0 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=1.gif">
+                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=1.gif" loading="lazy" alt="Sensitivity analysis (r_c = 1.5) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=1.5 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=1.gif">
+                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=1.gif" loading="lazy" alt="Sensitivity analysis (r_c = 3.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=3.0 </h2>
               </td>
             </tr>
@@ -4664,15 +4664,15 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=2.gif">
+                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=2.gif" loading="lazy" alt="Sensitivity analysis (r_c = 0.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=0.0 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=2.gif">
+                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=2.gif" loading="lazy" alt="Sensitivity analysis (r_c = 1.5) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=1.5 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=2.gif">
+                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=2.gif" loading="lazy" alt="Sensitivity analysis (r_c = 3.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=3.0 </h2>
               </td>
             </tr>
@@ -4683,15 +4683,15 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=3.gif">
+                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=3.gif" loading="lazy" alt="Sensitivity analysis (r_c = 0.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=0.0 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=3.gif">
+                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=3.gif" loading="lazy" alt="Sensitivity analysis (r_c = 1.5) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=1.5 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=3.gif">
+                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=3.gif" loading="lazy" alt="Sensitivity analysis (r_c = 3.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=3.0 </h2>
               </td>
             </tr>
@@ -4702,15 +4702,15 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=4.gif">
+                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=4.gif" loading="lazy" alt="Sensitivity analysis (r_c = 0.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=0.0 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=4.gif">
+                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=4.gif" loading="lazy" alt="Sensitivity analysis (r_c = 1.5) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=1.5 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=4.gif">
+                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=4.gif" loading="lazy" alt="Sensitivity analysis (r_c = 3.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=3.0 </h2>
               </td>
             </tr>
@@ -4721,15 +4721,15 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=5.gif">
+                <img src="./images/sensitivity_analysis/r_c=0.0/dvf_vehicle=10_obstacle=0_run=5.gif" loading="lazy" alt="Sensitivity analysis (r_c = 0.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=0.0 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=5.gif">
+                <img src="./images/sensitivity_analysis/r_c=1.5/dvf_vehicle=10_obstacle=0_run=5.gif" loading="lazy" alt="Sensitivity analysis (r_c = 1.5) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=1.5 </h2>
               </td>
               <td>
-                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=5.gif">
+                <img src="./images/sensitivity_analysis/r_c=3.0/dvf_vehicle=10_obstacle=0_run=5.gif" loading="lazy" alt="Sensitivity analysis (r_c = 3.0) with 10 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> r<sub>c</sub>=3.0 </h2>
               </td>
             </tr>
@@ -4748,15 +4748,15 @@
       <h2 class="title is-3">
         Limitations
       </h2>
-      <div id="results-carousel" class="carousel results-carousel">
+      <div id="results-carousel-8" class="carousel results-carousel">
         <div class="item">
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/limitations/densely_packed/dvf_vehicle=10_obstacle=25_run=0.gif">
+                <img src="./images/limitations/densely_packed/dvf_vehicle=10_obstacle=25_run=0.gif" loading="lazy" alt="Limitation example: densely packed scenario with 10 vehicles and 25 obstacles">
               </td>
               <td>
-                <img src="./images/limitations/densely_packed/dvf_vehicle=10_obstacle=25_run=1.gif">
+                <img src="./images/limitations/densely_packed/dvf_vehicle=10_obstacle=25_run=1.gif" loading="lazy" alt="Limitation example: densely packed scenario with 10 vehicles and 25 obstacles">
               </td>
             </tr>
           </table>
@@ -4770,10 +4770,10 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/limitations/crowded_target/dvf_vehicle=10_obstacle=0_run=0.gif">
+                <img src="./images/limitations/crowded_target/dvf_vehicle=10_obstacle=0_run=0.gif" loading="lazy" alt="Limitation example: crowded target scenario with 10 vehicles and 0 obstacles">
               </td>
               <td>
-                <img src="./images/limitations/crowded_target/dvf_vehicle=10_obstacle=25_run=1.gif">
+                <img src="./images/limitations/crowded_target/dvf_vehicle=10_obstacle=25_run=1.gif" loading="lazy" alt="Limitation example: crowded target scenario with 10 vehicles and 25 obstacles">
               </td>
             </tr>
           </table>
@@ -4787,11 +4787,11 @@
           <table style="table-layout: fixed; word-break: break-all; word-wrap: break-word;" width="100%">
             <tr>
               <td>
-                <img src="./images/limitations/dynamic_obstacles/dvf_vehicle=30_obstacle=0_run=0.gif">
+                <img src="./images/limitations/dynamic_obstacles/dvf_vehicle=30_obstacle=0_run=0.gif" loading="lazy" alt="Limitation example: dynamic obstacles scenario with 30 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> <strong>Failed Example</strong> </h2>
               </td>
               <td>
-                <img src="./images/limitations/dynamic_obstacles/dvf_vehicle=30_obstacle=0_run=1.gif">
+                <img src="./images/limitations/dynamic_obstacles/dvf_vehicle=30_obstacle=0_run=1.gif" loading="lazy" alt="Limitation example: dynamic obstacles scenario with 30 vehicles and 0 obstacles">
                 <h2 class="subtitle has-text-centered"> <strong>Successful Example</strong> </h2>
               </td>
             </tr>
@@ -4836,7 +4836,7 @@
         <div class="content">
 
           <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> under the license <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener noreferrer">Academic Project Page Template</a> under the license <a rel="license noopener noreferrer"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>. We thank the authors for the open-source code.
           </p>
 

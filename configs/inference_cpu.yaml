@@ -42,7 +42,7 @@ save plot: True
 plot folder: ./plots/prediction
 
 # config for test data
-test data souce: fixed test data # choose from ["fixed test data" (use fixed test dataset), "on the fly" (randomly generate test case)]
+test data source: fixed test data # choose from ["fixed test data" (use fixed test dataset), "on the fly" (randomly generate test case)]
 
 ## config for fixed test data
 # Note: if you want to compare the performance of different models, you should fix the test dataset

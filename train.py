@@ -102,7 +102,7 @@ def train_self_supervised(config):
     scheduler = ReduceLROnPlateau(optimizer = optimizer, mode = 'min', verbose = True, 
                                   patience = config["learning rate patience"],
                                   factor = config["learning rate factor"], 
-                                  min_lr = config["min learining rate"])
+                                  min_lr = config["min learning rate"])
     criterion = SelfSuperVisedLearningLoss(device=device)
 
     best_loss = np.inf

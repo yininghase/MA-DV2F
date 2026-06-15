@@ -29,7 +29,7 @@ def inference_gnn(config):
             collect trajectory (bool): Whether to save trajectory data.
             data folder (str): Directory for saving collected data files.
             horizon (int): Prediction horizon length (must be 1 for DVF mode).
-            test data souce (str): Either "fixed test data" or "on the fly".
+            test data source (str): Either "fixed test data" or "on the fly".
             test data folder (str): Path to pre-generated test data.
             test data each case (int): Max test cases per configuration.
             simulation runs (int): Number of simulation episodes to run.
@@ -98,7 +98,7 @@ def inference_gnn(config):
     model.to(device)
     
     
-    if config["test data souce"] == "fixed test data":
+    if config["test data source"] == "fixed test data":
         
         assert os.path.exists(config["test data folder"]), \
             "The test data folder does not exist!"
@@ -111,7 +111,7 @@ def inference_gnn(config):
 
         config["simulation runs"] = len(test_data)
     
-    elif config["test data souce"] == "on the fly":
+    elif config["test data source"] == "on the fly":
         pass
     
     else:
@@ -122,7 +122,7 @@ def inference_gnn(config):
 
     for i in tqdm(range(config["simulation runs"])):
         
-        if config["test data souce"] == "fixed test data":
+        if config["test data source"] == "fixed test data":
             
             starts, targets, obstacles, _ = test_data[i]
             
@@ -130,7 +130,7 @@ def inference_gnn(config):
             targets = targets.numpy()
             obstacles = obstacles.numpy()
         
-        elif config["test data souce"] == "on the fly":
+        elif config["test data source"] == "on the fly":
                   
             vehicles, obstacles = get_problem(num_vehicles, num_obstacles)
             starts = vehicles[0,:,:4]

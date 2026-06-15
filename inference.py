@@ -260,7 +260,7 @@ def inference_multiple_cases_parallel(config):
     model.to(device)
     model.eval()
     
-    if config["test data souce"] == "fixed test data":
+    if config["test data source"] == "fixed test data":
         
         assert os.path.exists(config["test data folder"]), \
             "The test data folder does not exist!"
@@ -274,7 +274,7 @@ def inference_multiple_cases_parallel(config):
 
         config["simulation runs"] = len(test_data)
     
-    elif config["test data souce"] == "on the fly":
+    elif config["test data source"] == "on the fly":
         pass
     
     else:
@@ -288,7 +288,7 @@ def inference_multiple_cases_parallel(config):
         
         B = min(batch_size, config["simulation runs"]-num_finished)
         
-        if config["test data souce"] == "fixed test data":
+        if config["test data source"] == "fixed test data":
             
             starts, targets, obstacles, _ = zip(*test_data[num_finished:num_finished+B])
             
@@ -296,7 +296,7 @@ def inference_multiple_cases_parallel(config):
             targets = torch.stack(targets, dim=0)
             obstacles = torch.stack(obstacles, dim=0)
         
-        elif config["test data souce"] == "on the fly":
+        elif config["test data source"] == "on the fly":
                   
             vehicles, obstacles = get_problem(num_vehicles, num_obstacles, data_length=B)
             starts = vehicles[:,:,:4]

@@ -13,7 +13,7 @@ weight decay: 0.000001
 
 learning rate patience: 10
 learning rate factor: 0.2
-min learining rate: 0.00000001
+min learning rate: 0.00000001
 
 # config for dataset
 num of vehicles: 3 # max number of vehicle in trainval dataset
